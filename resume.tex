@@ -1,0 +1,194 @@
+%-------------------------
+% Resume in LaTeX
+% Author: Tirth Nareshbhai Oza
+%-------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generated PDF is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Tirth Nareshbhai Oza} \\ \vspace{4pt}
+    \small +91-9313033324 $|$
+    \href{mailto:ozatirth51@gmail.com}{\underline{ozatirth51@gmail.com}} $|$
+    \href{https://linkedin.com/in/oza-tirth-28b031269}{\underline{linkedin.com/in/oza-tirth-28b031269}} $|$
+    \href{https://github.com/Tirth2004-git}{\underline{github.com/Tirth2004-git}}
+\end{center}
+
+%-----------SUMMARY-----------
+\section{Summary}
+\small{
+Motivated B.Tech Information Technology student with hands-on experience in full stack web development using the MERN stack. Completed an AI internship where I gained practical exposure to problem-solving and project workflows. Eager to build scalable, user-focused web applications and grow in a professional development environment.
+}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Parul University}{Vadodara, Gujarat}
+      {B.Tech in Information Technology --- CGPA: 8.45/10}{2023 -- 2027 (Expected)}
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Artificial Intelligence Intern}{Aug 2025 -- Oct 2025}
+      {EdiGlobe}{}
+      \resumeItemListStart
+        \resumeItem{Worked on AI-based minor and major projects as part of a structured internship program.}
+        \resumeItem{Gained practical exposure to real-world development workflows, problem-solving, and teamwork.}
+        \resumeItem{Applied project lifecycle skills including planning, development, and delivery under mentorship.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Projects}
+  \resumeSubHeadingListStart
+
+    \resumeProjectHeading
+      {\textbf{Smart Faculty \& Timetable Planner (EduX System)} $|$ \emph{React (Next.js), Node.js, MongoDB, Tailwind CSS, JWT}}{2025}
+      \resumeItemListStart
+        \resumeItem{Developed a full-stack web application to generate conflict-free academic timetables with a normalized MongoDB schema and dynamic timetable builder.}
+        \resumeItem{Implemented real-time validation to prevent teacher clashes and workload imbalance, along with constraint-based scheduling logic to automate timetable generation.}
+        \resumeItem{Built JWT-based authentication, secure password handling, and a PDF export feature for end-to-end usability.}
+      \resumeItemListEnd
+
+    \resumeProjectHeading
+      {\textbf{Car Rental Booking System} $|$ \emph{React, Node.js, Express.js, MongoDB}}{2025}
+      \resumeItemListStart
+        \resumeItem{Developed a MERN stack application for end-to-end car rental booking management including listings, bookings, and user roles.}
+        \resumeItem{Implemented user authentication, an admin dashboard, and booking management with filtering capabilities.}
+        \resumeItem{Built RESTful APIs for all backend operations following clean architecture and modular design principles.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Python, JavaScript, C++} \\
+     \textbf{Web Development}{: React.js (Next.js), Node.js, Express.js, Tailwind CSS, HTML, CSS} \\
+     \textbf{Databases}{: MongoDB, SQL} \\
+     \textbf{Libraries}{: Pandas, NumPy} \\
+     \textbf{Tools \& Platforms}{: Git, GitHub, Linux} \\
+     \textbf{CS Fundamentals}{: Data Structures \& Algorithms, Operating Systems, DBMS, Computer Networks, OOP}
+    }}
+ \end{itemize}
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Artificial Intelligence Internship}{2025}
+      {EdiGlobe $|$ ID: EGICZ0189}{}
+      \resumeItemListStart
+        \resumeItem{Completed a structured AI internship program covering real-world development workflows, AI-based project planning, development, and delivery under mentorship.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Computer Networks and Internet Protocol}{2025}
+      {NPTEL $|$ Elite Certificate --- 61\% Score (Jan--Apr 2025)}{}
+      \resumeItemListStart
+        \resumeItem{Covered core networking concepts, protocols, and internet architecture.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Machine Learning (ML) in Hindi}{2025}
+      {NPTEL $|$ Elite + Top 5\% --- 71\% Score (Jul--Oct 2025)}{}
+      \resumeItemListStart
+        \resumeItem{Covered supervised/unsupervised learning, feature engineering, and ML model evaluation.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------COURSEWORK & COMPETITIVE PROGRAMMING-----------
+\section{Coursework \& Competitive Programming}
+  \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l}
+    \textbf{Relevant Coursework} & \textbf{Coding Profiles} \\
+    \small{$\bullet$ Data Structures \& Algorithms, DBMS} & \small{$\bullet$ LeetCode: 219+ problems solved} \\
+    \small{$\bullet$ Computer Networks, Operating Systems} & \small{$\bullet$ GeeksforGeeks: 59+ problems solved} \\
+    \small{$\bullet$ Machine Learning, Web Development} & \\
+  \end{tabular*}
+
+%-------------------------------------------
+\end{document}
