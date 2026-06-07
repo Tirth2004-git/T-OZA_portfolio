@@ -7,7 +7,7 @@
 
 Welcome to my developer portfolio! This is an immersive, sci-fi/cyberpunk-themed web experience crafted to showcase my projects, professional skills, certifications, and academic background.
 
-🔗 **Live Link:** *(Update this with your hosted URL, e.g., GitHub Pages or Vercel)*
+🔗 **Live Link:** [Tirth Oza Portfolio](https://tirth-oza.vercel.app/)
 
 ---
 
