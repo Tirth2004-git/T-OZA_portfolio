@@ -1,33 +1,40 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useTheme } from "../context/ThemeContext";
 
-const SectionTitle = ({ label, title, highlight }) => {
-  const { theme } = useTheme();
-
+const SectionTitle = ({ label, title, highlight, description }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="mb-12 relative z-10"
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="mb-12 max-w-3xl"
     >
-      {/* Small Category Label */}
-      <div className="flex items-center gap-4 text-xs font-mono tracking-[0.3em] uppercase text-cyber-cyan mb-2 font-semibold">
-        <span className="w-10 h-[1px] bg-cyber-cyan shadow-[0_0_8px_#00f0ff] inline-block" />
-        {label}
-      </div>
+      {/* Category Indicator */}
+      {label && (
+        <div className="flex items-center gap-2 text-xs font-mono text-theme-accent font-medium mb-2.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-theme-accent" />
+          <span>{label}</span>
+        </div>
+      )}
 
-      {/* Main Glitch Title */}
-      <h2 className="font-orbitron font-black text-3xl md:text-5xl tracking-tight leading-none text-cyber-text dark:text-cyber-text">
+      {/* Main Display Heading */}
+      <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-theme-text tracking-tight leading-[1.15]">
         {title}{" "}
-        <span className="bg-gradient-to-r from-cyber-cyan to-cyber-purple bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,240,255,0.3)]">
-          {highlight}
-        </span>
+        {highlight && (
+          <span className="text-theme-accent">{highlight}</span>
+        )}
       </h2>
+
+      {/* Optional Contextual Subheading */}
+      {description && (
+        <p className="mt-3 text-sm sm:text-base text-theme-muted font-sans leading-relaxed">
+          {description}
+        </p>
+      )}
     </motion.div>
   );
 };
 
 export default SectionTitle;
+

@@ -1,107 +1,147 @@
 @import "tailwindcss";
 
+:root {
+  /* Light Mode Tokens */
+  --bg: #F5F6F8;
+  --surface: #FFFFFF;
+  --surface-alt: #EEF0F3;
+  --border: #DDE1E7;
+  --text-primary: #171B22;
+  --text-muted: #5B6472;
+  --accent-primary: #C97A2E;
+  --accent-primary-hover: #B36A24;
+  --accent-secondary: #0F9488;
+  --accent-secondary-muted: rgba(15, 148, 136, 0.12);
+  --accent-primary-muted: rgba(201, 122, 46, 0.12);
+  --card-shadow: 0 4px 20px -2px rgba(23, 27, 34, 0.05), 0 2px 6px -1px rgba(23, 27, 34, 0.03);
+  --card-shadow-hover: 0 12px 32px -4px rgba(23, 27, 34, 0.08), 0 4px 12px -2px rgba(23, 27, 34, 0.04);
+}
+
+[data-theme="dark"],
+.dark {
+  /* Dark Mode Tokens */
+  --bg: #12161C;
+  --surface: #1B212B;
+  --surface-alt: #212836;
+  --border: #2A3140;
+  --text-primary: #EDEFF3;
+  --text-muted: #9AA3B2;
+  --accent-primary: #E2984A;
+  --accent-primary-hover: #F0AB63;
+  --accent-secondary: #4FD1C5;
+  --accent-secondary-muted: rgba(79, 209, 197, 0.12);
+  --accent-primary-muted: rgba(226, 152, 74, 0.12);
+  --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
+  --card-shadow-hover: 0 12px 32px -4px rgba(0, 0, 0, 0.5);
+}
+
 @theme {
-  --color-cyber-cyan: #00f0ff;
-  --color-cyber-purple: #7b2fff;
-  --color-cyber-pink: #ff2d78;
-  --color-cyber-green: #00ff88;
-  --color-cyber-gold: #ffd700;
-  
-  --color-cyber-bg: #020408;
-  --color-cyber-surface: #060d16;
-  --color-cyber-text: #e8f4f8;
-  --color-cyber-muted: #648a9f;
-  --color-cyber-border: rgba(0, 240, 255, 0.15);
+  --color-theme-bg: var(--bg);
+  --color-theme-surface: var(--surface);
+  --color-theme-surface-alt: var(--surface-alt);
+  --color-theme-border: var(--border);
+  --color-theme-text: var(--text-primary);
+  --color-theme-muted: var(--text-muted);
+  --color-theme-accent: var(--accent-primary);
+  --color-theme-accent-hover: var(--accent-primary-hover);
+  --color-theme-teal: var(--accent-secondary);
 
-  --color-cyber-bgLight: #f4f7f6;
-  --color-cyber-surfaceLight: rgba(255, 255, 255, 0.7);
-  --color-cyber-textLight: #0b132b;
-  --color-cyber-mutedLight: #5c6b73;
-  --color-cyber-borderLight: rgba(123, 47, 255, 0.12);
-
-  --font-orbitron: "Orbitron", sans-serif;
-  --font-syne: "Syne", sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
-  
-  --shadow-glow: 0 0 20px rgba(0, 240, 255, 0.4), 0 0 60px rgba(0, 240, 255, 0.1);
-  --shadow-glowPurple: 0 0 20px rgba(123, 47, 255, 0.4), 0 0 60px rgba(123, 47, 255, 0.1);
-  --shadow-glowPink: 0 0 20px rgba(255, 45, 120, 0.4), 0 0 60px rgba(255, 45, 120, 0.1);
-  --shadow-glowGreen: 0 0 20px rgba(0, 255, 136, 0.4), 0 0 60px rgba(0, 255, 136, 0.1);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    transition: background-color 180ms ease, color 180ms ease;
   }
 
   body {
-    -webkit-tap-highlight-color: transparent;
+    font-family: var(--font-sans);
+    background-color: var(--bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
-  /* Custom Neon Glow Scrollbar */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  p {
+    max-width: 75ch;
+  }
+
+  /* Keyboard focus states */
+  *:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+  }
+
+  /* Custom Scrollbar */
   ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
   }
   
   ::-webkit-scrollbar-track {
-    background: #020408;
+    background: var(--bg);
   }
   
   ::-webkit-scrollbar-thumb {
-    background: #7b2fff;
+    background: var(--border);
     border-radius: 4px;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: #00f0ff;
-    box-shadow: 0 0 10px #00f0ff;
-  }
-
-  ::selection {
-    background: #ff2d78;
-    color: #020408;
+    background: var(--accent-primary);
   }
 }
 
-/* Cyber Noise Grain Overlay */
-.cyber-overlay {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
-  background-size: 180px;
+/* Radar & Signal Grid Background motif */
+.signal-grid {
+  background-image: 
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 65% 55% at 50% 30%, #000 70%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 30%, #000 70%, transparent 100%);
+  opacity: 0.35;
 }
 
-/* Cyber Horizontal Scanline Overlay */
-.scanlines-overlay {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 240, 255, 0.04) 2px,
-    rgba(0, 240, 255, 0.04) 4px
-  );
+/* Signal Pulse Animation */
+@keyframes signalPulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
 }
 
-/* Sibling Floating Label Trigger CSS */
-.input-sibling-focus-label {
-  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+.animate-signal-pulse {
+  animation: signalPulse 3s ease-in-out infinite;
 }
 
-input:focus ~ .input-sibling-focus-label,
-input:not(:placeholder-shown) ~ .input-sibling-focus-label,
-textarea:focus ~ .input-sibling-focus-label,
-textarea:not(:placeholder-shown) ~ .input-sibling-focus-label {
-  transform: translateY(-24px) scale(0.85);
-  color: #00f0ff;
-  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
-  font-weight: 700;
-}
-
-/* Custom Fade in animations for menus */
+/* Fade in for modals */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
+  from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.25s ease-out forwards;
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

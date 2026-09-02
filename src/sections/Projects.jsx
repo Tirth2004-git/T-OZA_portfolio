@@ -10,38 +10,36 @@ const Projects = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.12,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.5, ease: "easeOut" },
     },
   };
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden">
+    <section id="projects" className="py-20 relative">
       <div className="container mx-auto px-6">
-        
-        {/* Section Header */}
         <SectionTitle
-          label="FEATURED WORK"
-          title="Selected"
-          highlight="Projects"
+          label="Featured Systems"
+          title="Architectural Projects &amp;"
+          highlight="Platforms"
+          description="Autonomous multi-agent orchestration, constraint-based scheduling algorithms, and machine learning pipelines."
         />
 
-        {/* Projects Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-10%" }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
         >
           {projectsData.map((project) => (
             <motion.div key={project.id} variants={itemVariants} className="h-full">
@@ -49,10 +47,10 @@ const Projects = () => {
             </motion.div>
           ))}
         </motion.div>
-
       </div>
     </section>
   );
 };
 
 export default Projects;
+

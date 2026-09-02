@@ -16,223 +16,224 @@ import {
   SiNumpy,
   SiPostman,
   SiHtml5,
+  SiDocker,
+  SiRedis,
 } from "react-icons/si";
-import { FaBrain, FaDatabase, FaNetworkWired, FaCode, FaCogs, FaProjectDiagram, FaCss3Alt, FaJs } from "react-icons/fa";
-import { GiBrain, GiArtificialIntelligence } from "react-icons/gi";
+import { FaBrain, FaDatabase, FaNetworkWired, FaCode, FaCogs, FaProjectDiagram, FaJs, FaSatellite, FaAward } from "react-icons/fa";
+import { GiBrain, GiArtificialIntelligence, GiRadarSweep } from "react-icons/gi";
 
 export const personalInfo = {
   name: "Tirth Oza",
-  title: "TIRTH OZA",
-  tagline: "FULL STACK DEVELOPER",
-  logo: {
-    text: "T//OZA",
-    image: "", // Add a path here, e.g. "/img/your-logo.png", to use an image logo dynamically
-  },
-  role: "Full Stack Developer | MERN Stack Developer | AI Enthusiast",
+  title: "MERN & AI / LLM Developer",
+  status: "Available for Roles & Research",
+  tagline: "Building multi-agent AI systems, full-stack platforms, and radar signal analytics.",
   email: "ozatirth51@gmail.com",
   phone: "+91 93*** *****",
-  location: "PATAN, GUJARAT · INDIA",
+  location: "Vadodara / Gujarat, India",
   linkedin: "https://www.linkedin.com/in/ozatirth9124/",
   github: "https://github.com/Tirth2004-git",
   bio: [
-  "I'm a B.Tech Information Technology student at Parul University passionate about building scalable full-stack applications, AI-powered systems, and cloud-ready solutions. I work with modern technologies including MERN stack, LLMs, Docker, and cloud platforms to develop production-ready applications.",
-
-  "My development journey includes building advanced AI agent platforms, machine learning applications, and enterprise-level web systems. I have hands-on experience with REST APIs, database design, authentication systems, containerization, and deploying applications using modern DevOps practices.",
-
-  "I have completed Google Cloud Skills Boost Arcade milestones, including Trooper Tier and advanced cloud achievements, gaining practical exposure to cloud infrastructure, Kubernetes, networking, and cloud services. I continuously improve my problem-solving skills through competitive programming and system design learning."
-],
+    "Final-year B.Tech Information Technology student at Parul University (2023–2027) with a CGPA of 8.44/10. Specializing in multi-agent AI systems using LangGraph, scalable full-stack web applications with the MERN stack, and applied machine learning.",
+    "Experienced in designing modular microservice architectures, constraint-based algorithms, and RESTful API ecosystems. Solved 450+ Data Structures & Algorithms problems across LeetCode and GeeksforGeeks.",
+    "Recognized in ISRO's Bharatiya Antariksh Hackathon 2026 for lunar subsurface ice detection using Chandrayaan-2 radar and optical datasets, and achieved Arcade Legend tier in the Google Cloud Arcade program."
+  ],
   education: {
     institution: "Parul University",
     degree: "B.Tech in Information Technology",
     gpa: "CGPA: 8.44 / 10",
     period: "2023 – 2027",
+    location: "Vadodara, Gujarat",
   },
   stats: [
-    { label: "LeetCode Solved", value: 342, countUp: true },
-    { label: "GFG Solved", value: 161, countUp: true },
-    { label: "CGPA / 10", value: 8.44, countUp: false },
+    { label: "DSA Solved (LeetCode + GFG)", value: "450+", countUp: false },
+    { label: "Degree CGPA / 10", value: "8.44", countUp: false },
+    { label: "NPTEL ML Rank", value: "Top 5%", countUp: false },
   ]
 };
-
 
 export const experienceData = [
   {
     role: "Artificial Intelligence Intern",
     company: "EdiGlobe",
     period: "AUG 2025 – OCT 2025",
+    type: "Internship",
+    location: "Remote / Hybrid",
+    summary: "Contributed across the software development lifecycle on production-oriented AI applications.",
     bullets: [
-      "Worked on AI-based minor and major projects as part of a structured internship program.",
-      "Gained practical exposure to real-world development workflows, problem-solving, and teamwork.",
-      "Applied project lifecycle skills including planning, development, and delivery under mentorship.",
+      "Scoped requirements and engineered architectural pipelines prior to development for minor and major AI applications.",
+      "Implemented machine learning preprocessing, model evaluation workflows, and API integration layers.",
+      "Collaborated under structured mentorship to deliver robust, tested software components on schedule."
     ]
   }
 ];
 
 export const projectsData = [
   {
-    id: "01",
-    year: "2025",
-    title: "Smart Faculty & Timetable Planner (EduX System)",
+    id: "cortex-ai",
+    year: "2026",
+    title: "CortexAI — Multi-Agent AI Platform",
+    tag: "LangGraph Multi-Agent Orchestration",
     description:
-      "Full-stack academic management platform for faculty, students, and administrators. Generates conflict-free timetables using constraint-based scheduling logic with teacher availability validation, classroom allocation, JWT authentication, role-based access control, and PDF timetable export.",
+      "Full-stack multi-agent AI platform that dynamically routes complex user requests across specialized autonomous agents for conversation, code generation, live web search, document processing, and image synthesis.",
+    architecture:
+      "Engineered with a modular Node.js/Express microservice architecture (auth, agent, and chat services communicating via REST). Utilizes LangGraph for stateful task routing, context-aware memory retention, Redis caching, and Dockerized backend deployment.",
+    tech: [
+      "React.js",
+      "Node.js",
+      "LangGraph",
+      "LangChain",
+      "MongoDB",
+      "Redis",
+      "Docker",
+      "REST APIs"
+    ],
+    github: "https://github.com/Tirth2004-git/Multi-Agent-AI-Platform",
+    live: "#",
+    featured: true,
+  },
+  {
+    id: "edux-planner",
+    year: "2025",
+    title: "EduX — Smart Faculty & Timetable Planner",
+    tag: "Constraint-Based Scheduling Engine",
+    description:
+      "Full-stack MERN management system for academic institutions that automates timetable generation using constraint-based scheduling algorithms with conflict resolution.",
+    architecture:
+      "Validates teacher availability, classroom capacity, and department division constraints in real time. Implements role-based access control (Admin, Faculty, Student) with JWT authentication and RESTful APIs across faculties, classrooms, and leaves.",
     tech: [
       "React.js",
       "Node.js",
       "Express.js",
       "MongoDB",
-      "JWT",
+      "JWT Auth",
       "Tailwind CSS"
     ],
-    github:
-      "https://github.com/Tirth2004-git/EduX_Time_Table_Managment",
+    github: "https://github.com/Tirth2004-git/EduX_Time_Table_Managment",
     live: "#",
-    image: "/img/timetable.png"
+    featured: true,
   },
-
   {
-    id: "02",
-    year: "2026",
-    title: "Multi-Agent AI Chatbot Platform",
-    description:
-      "Advanced AI-powered conversational platform built with a multi-agent architecture. Supports specialized AI agents for chat, web search, code generation, image generation, and document creation. Implements LangGraph and LangChain workflows with RAG-based context retrieval, Gemini and Grok API integration, Redis caching, and Dockerized backend services.",
-    tech: [
-      "React.js",
-      "Node.js",
-      "Express.js",
-      "LangChain",
-      "LangGraph",
-      "RAG",
-      "Gemini API",
-      "Grok API",
-      "Redis",
-      "Docker",
-      "MongoDB"
-    ],
-    github:
-      "https://github.com/Tirth2004-git/Multi-Agent-AI-Platform",
-    live: "#",
-    image: "/img/ai_agent.png"
-  },
-
-  {
-    id: "03",
+    id: "sympto-ai",
     year: "2025",
-    title: "SymptoAI: AI-Powered Disease Prediction Platform",
+    title: "SymptoAI — ML Health Diagnostic Engine",
+    tag: "Multi-Model Disease Classification",
     description:
-      "Machine learning-based healthcare prediction platform that predicts multiple diseases from user symptoms through an interactive web interface. Includes complete ML pipeline with data preprocessing, feature engineering, model training, evaluation, and deployment using Flask and Streamlit.",
+      "Machine learning healthcare platform predicting potential medical conditions from multi-symptom user input with confidence metrics and actionable health insights.",
+    architecture:
+      "Full machine learning pipeline covering data cleaning, categorical feature encoding, multi-algorithm training (Random Forest, SVM), and deployment via Flask REST endpoints.",
     tech: [
       "Python",
       "Flask",
       "Scikit-Learn",
       "Pandas",
-      "Machine Learning",
-      "Streamlit"
+      "Streamlit",
+      "ML Pipelines"
     ],
-    github:
-      "https://github.com/Tirth2004-git/SymptoAI",
+    github: "https://github.com/Tirth2004-git/SymptoAI",
     live: "#",
-    image: "/img/sympto_ai.png"
+    featured: false,
   },
-
   {
-    id: "04",
+    id: "drive-ease",
     year: "2025",
-    title: "Car Rental Booking System",
+    title: "DriveEase — Enterprise Vehicle Rental Platform",
+    tag: "Full-Stack Booking & Inventory",
     description:
-      "End-to-end MERN stack car rental platform enabling users to browse vehicles, manage bookings, and handle rental operations. Includes secure authentication, admin dashboard, booking management, filtering, and scalable RESTful API architecture.",
+      "Production-ready vehicle reservation and fleet management system featuring dynamic vehicle catalogs, real-time availability filters, and administrative inventory controls.",
+    architecture:
+      "Built with secure JWT token authorization, MongoDB aggregation queries for booking calendars, and scalable REST API endpoints.",
     tech: [
       "React.js",
       "Node.js",
       "Express.js",
       "MongoDB",
-      "JWT",
-      "Tailwind CSS"
+      "JWT Auth"
     ],
-    github:
-      "https://github.com/Tirth2004-git/DriveEase-Car-Rental-Booking-System",
+    github: "https://github.com/Tirth2004-git/DriveEase-Car-Rental-Booking-System",
     live: "#",
-    image: "/img/car_rental.png"
+    featured: false,
   }
 ];
+
+export const hackathonsData = [
+  {
+    title: "ISRO Bharatiya Antariksh Hackathon (BAH)",
+    year: "2026",
+    issuer: "Indian Space Research Organisation (ISRO)",
+    badge: "National Space Hackathon",
+    description:
+      "Developed a lunar subsurface ice and water presence detection system using Chandrayaan-2 DFSAR (Dual-Frequency Synthetic Aperture Radar) and OHRC (Optical High Resolution Camera) planetary datasets.",
+    highlights: [
+      "Processed polar radar backscatter and high-res optical imagery for dielectric anomaly identification.",
+      "Implemented spatial filtering and signal-to-noise enhancement algorithms for subsurface mapping.",
+      "Explored planetary geosciences and radar remote sensing telemetry."
+    ],
+    verifyUrl: "https://github.com/Tirth2004-git",
+  }
+];
+
 export const certificationsData = [
   {
-    title: "Artificial Intelligence Internship",
-    issuer: "EDIGLOBE",
+    title: "Machine Learning (ML)",
+    issuer: "NPTEL (IIT Madras / Swayam)",
     year: "2025",
-    icon: GiArtificialIntelligence,
-    iconColor: "#00f0ff",
-    glowColor: "cyan",
-    score: "ID: EGICZ0189",
-    image: "/img/AI_Ediglobe_inteship_complete_page-0001.jpg",
-    verifyUrl:
-      "https://drive.google.com/file/d/1T1DDsCS5M-eTmwNuc7NwPMEHIVqzW6Dh/view?usp=drive_link",
+    score: "Elite + Top 5% (71%)",
+    category: "AI & Machine Learning",
+    image: "/img/Machine Learning (ML) in Hindi_page-0001.jpg",
+    verifyUrl: "https://drive.google.com/file/d/1MX76jPtSw4ayjnoc2PqAxq7A41xxt_-g/view?usp=sharing",
   },
-
   {
     title: "Computer Networks & Internet Protocol",
-    issuer: "NPTEL",
+    issuer: "NPTEL (IIT Kharagpur / Swayam)",
     year: "2025",
-    icon: FaNetworkWired,
-    iconColor: "#7b2fff",
-    glowColor: "purple",
-    score: "ELITE CERTIFICATE · 61%",
+    score: "Elite Certificate (61%)",
+    category: "Core Computer Science",
     image: "/img/Computer Networks And Internet Protocol_page-0001.jpg",
-    verifyUrl:
-      "https://drive.google.com/file/d/1byOq7FkYYwtlmI2JYGFXID50j-NWJJ8B/view?usp=sharing",
+    verifyUrl: "https://drive.google.com/file/d/1byOq7FkYYwtlmI2JYGFXID50j-NWJJ8B/view?usp=sharing",
   },
-
   {
-    title: "Machine Learning in Hindi",
-    issuer: "NPTEL",
+    title: "Artificial Intelligence Internship",
+    issuer: "EdiGlobe",
     year: "2025",
-    icon: GiBrain,
-    iconColor: "#00ff88",
-    glowColor: "green",
-    score: "ELITE + TOP 5% · 71%",
-    image: "/img/Machine Learning (ML) in Hindi_page-0001.jpg",
-    verifyUrl:
-      "https://drive.google.com/file/d/1MX76jPtSw4ayjnoc2PqAxq7A41xxt_-g/view?usp=sharing",
+    score: "Credential ID: EGICZ0189",
+    category: "Industry Experience",
+    image: "/img/AI_Ediglobe_inteship_complete_page-0001.jpg",
+    verifyUrl: "https://drive.google.com/file/d/1T1DDsCS5M-eTmwNuc7NwPMEHIVqzW6Dh/view?usp=drive_link",
   },
-
   {
-    title: "JavaScript Programming Course - Self Paced",
+    title: "JavaScript Programming — Self Paced",
     issuer: "GeeksforGeeks",
     year: "2025",
-    icon: FaJs,
-    iconColor: "#f7df1e",
-    glowColor: "yellow",
-    score: "CERTIFICATE OF COMPLETION",
+    score: "Certificate of Completion",
+    category: "Frontend & Core JS",
     image: "/img/javascript_gfg_certificate.png",
-    verifyUrl:
-      "https://drive.google.com/file/d/18kQz_QN5kRD6oe2NmyDUKdMQsyS5FGpQ/view?usp=sharing",
+    verifyUrl: "https://drive.google.com/file/d/18kQz_QN5kRD6oe2NmyDUKdMQsyS5FGpQ/view?usp=sharing",
   }
 ];
+
 export const codingProfilesData = [
   {
     platform: "LeetCode",
-    username: "ozatirth51",
-    stats: "300+ Solved",
-    details: "Focus: Data Structures, Algorithms, Dynamic Programming",
-    icon: "code",
-    color: "gold",
+    username: "OzaTirth_2004",
+    stats: "300+ Problems Solved",
+    details: "Algorithms, Dynamic Programming, Trees, Graphs, and Hash Tables.",
+    icon: "leetcode",
     url: "https://leetcode.com/u/OzaTirth_2004/",
   },
   {
     platform: "GeeksforGeeks",
     username: "ozatirth51",
-    stats: "150+ Solved",
-    details: "Focus: Math, Core CS Problems, Array-based validations",
+    stats: "150+ Problems Solved",
+    details: "Core Data Structures, Mathematical Algorithms, and Optimization.",
     icon: "gfg",
-    color: "green",
-    url: "https://www.geeksforgeeks.org/profile/ozatirtgav6?tab=activity",
+    url: "https://www.geeksforgeeks.org/user/ozatirth51/",
   },
   {
     platform: "GitHub",
     username: "Tirth2004-git",
     stats: "19+ Repositories Built",
-    details: "Full Stack repositories, AI project releases",
+    details: "Multi-agent systems, full-stack MERN codebases, ML pipelines.",
     icon: "github",
-    color: "cyan",
     url: "https://github.com/Tirth2004-git",
   }
 ];

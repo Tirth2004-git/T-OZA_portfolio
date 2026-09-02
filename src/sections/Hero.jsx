@@ -1,258 +1,214 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaCode } from "react-icons/fa";
-import { SiGeeksforgeeks } from "react-icons/si";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { SiLeetcode, SiGeeksforgeeks } from "react-icons/si";
 import { personalInfo } from "../data/portfolioData";
 import AnimatedButton from "../components/AnimatedButton";
-
-// Typing Effect Component
-const TypingText = ({ text }) => {
-  const [displayedText, setDisplayedText] = useState("");
-
-  useEffect(() => {
-    setDisplayedText("");
-  }, [text]);
-
-  useEffect(() => {
-    if (displayedText.length < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(text.substring(0, displayedText.length + 1));
-      }, 60);
-      return () => clearTimeout(timeout);
-    }
-  }, [displayedText, text]);
-
-  return <span>{displayedText}</span>;
-};
-
-// CountUp Component
-const CountUp = ({ value, duration = 1.5 }) => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    let start = 0;
-    const end = parseInt(value, 10);
-    if (isNaN(end)) return;
-    const totalMiliseconds = duration * 1000;
-    const incrementTime = Math.max(10, Math.floor(totalMiliseconds / end));
-    
-    const timer = setInterval(() => {
-      start += 1;
-      setCount(start);
-      if (start >= end) {
-        clearInterval(timer);
-      }
-    }, incrementTime);
-
-    return () => clearInterval(timer);
-  }, [value, duration]);
-
-  return <span>{count}</span>;
-};
+import AgentSignalGraph from "../components/AgentSignalGraph";
 
 const Hero = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
+  const heroRef = useRef(null);
+  const badgeRef = useRef(null);
+  const titleRef = useRef(null);
+  const roleRef = useRef(null);
+  const descRef = useRef(null);
+  const ctaRef = useRef(null);
+  const statsRef = useRef(null);
+  const visualRef = useRef(null);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
 
-  // Floating tags mapping
-  const floatingTags = [
-    { name: "React.js", x: "-110px", y: "-90px", delay: 0 },
-    { name: "Node.js", x: "120px", y: "-70px", delay: 0.5 },
-    { name: "MongoDB", x: "-120px", y: "80px", delay: 1 },
-    { name: "Express.js", x: "110px", y: "70px", delay: 1.5 },
-    { name: "Tailwind CSS", x: "0px", y: "-130px", delay: 2 },
-  ];
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.from(badgeRef.current, {
+        opacity: 0,
+        y: -15,
+        duration: 0.6,
+      })
+        .from(
+          titleRef.current,
+          {
+            opacity: 0,
+            y: 25,
+            duration: 0.8,
+          },
+          "-=0.3"
+        )
+        .from(
+          roleRef.current,
+          {
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+          },
+          "-=0.4"
+        )
+        .from(
+          descRef.current,
+          {
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+          },
+          "-=0.4"
+        )
+        .from(
+          ctaRef.current,
+          {
+            opacity: 0,
+            y: 15,
+            duration: 0.5,
+          },
+          "-=0.3"
+        )
+        .from(
+          statsRef.current,
+          {
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+          },
+          "-=0.2"
+        )
+        .from(
+          visualRef.current,
+          {
+            opacity: 0,
+            scale: 0.96,
+            duration: 0.9,
+          },
+          "-=0.8"
+        );
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
       id="hero"
-      className="min-height-screen flex items-center justify-center pt-24 pb-12 overflow-hidden relative"
+      ref={heroRef}
+      className="min-h-[85vh] flex items-center justify-center pt-28 pb-16 relative"
     >
-      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
-        
-        {/* Hero Left Content */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col justify-center"
-        >
-          <motion.div
-            variants={itemVariants}
-            className="font-mono text-xs md:text-sm text-cyber-cyan tracking-[0.25em] uppercase mb-4"
+      <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
+        {/* Left Content Column */}
+        <div className="lg:col-span-6 flex flex-col justify-center">
+          {/* Signal Status Badge */}
+          <div
+            ref={badgeRef}
+            className="inline-flex items-center gap-2 font-mono text-xs text-theme-accent bg-theme-surface border border-theme-border px-3 py-1 rounded-full w-fit mb-6 shadow-sm"
           >
-            [ <TypingText text=" FULL STACK DEVELOPER " /> ]
-          </motion.div>
+            <span className="w-2 h-2 rounded-full bg-theme-accent animate-signal-pulse" />
+            <span>MERN &amp; Multi-Agent AI Developer</span>
+          </div>
 
-          <motion.h1
-            variants={itemVariants}
-            className="font-orbitron font-black text-5xl md:text-7xl lg:text-8xl tracking-tight leading-none mb-4"
+          {/* Heading */}
+          <h1
+            ref={titleRef}
+            className="font-display font-bold text-4xl sm:text-6xl lg:text-7xl tracking-tight text-theme-text leading-[1.08] mb-4"
           >
-            TIRTH
-            <div className="bg-gradient-to-r from-cyber-cyan to-cyber-purple bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,240,255,0.4)] relative inline-block select-none animate-pulse-slow">
-              OZA
-            </div>
-          </motion.h1>
+            Tirth <span className="text-theme-accent">Oza</span>
+          </h1>
 
-          <motion.p
-            variants={itemVariants}
-            className="font-syne font-semibold text-lg md:text-xl text-cyber-muted mb-4 tracking-wide"
+          {/* Role Subheading */}
+          <p
+            ref={roleRef}
+            className="font-display font-medium text-lg sm:text-xl text-theme-text/90 mb-4"
           >
-            Full Stack Developer &amp; AI Enthusiast
-          </motion.p>
+            LangGraph Orchestration &middot; Full-Stack Systems &middot; Applied ML
+          </p>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-sm md:text-base text-cyber-muted max-w-[460px] leading-relaxed mb-8"
+          {/* Positioning Summary */}
+          <p
+            ref={descRef}
+            className="font-sans text-sm sm:text-base text-theme-muted leading-relaxed max-w-xl mb-8"
           >
-            Crafting scalable, user-focused web applications with modern technologies. Passionate about turning complex problems into elegant digital experiences.
-          </motion.p>
+            Final-year B.Tech IT student at Parul University (CGPA 8.44/10). Specializing in autonomous multi-agent state routing with LangGraph, scalable MERN architectures, and ISRO lunar radar subsurface analytics.
+          </p>
 
-          {/* Call-to-actions */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap gap-4 mb-10"
-          >
+          {/* CTAs & Socials */}
+          <div ref={ctaRef} className="flex flex-wrap items-center gap-4 mb-10">
             <AnimatedButton variant="primary" href="#projects">
-              VIEW PROJECTS
+              View Projects
             </AnimatedButton>
-            <AnimatedButton variant="ghost" href="/img/Tirth_resume.jpg" download="Tirth_Oza_Resume.jpg">
-              DOWNLOAD RESUME
+            <AnimatedButton
+              variant="secondary"
+              href="/img/Tirth_resume.jpg"
+              download="Tirth_Oza_Resume.jpg"
+            >
+              Resume
             </AnimatedButton>
-          </motion.div>
 
-          {/* Social Icons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex gap-4 items-center mb-10 text-cyber-muted"
-          >
-            <span className="text-[10px] font-mono tracking-widest uppercase">CONNECT //</span>
-            <a
-              href="https://github.com/Tirth2004-git"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg hover:text-cyber-cyan hover:drop-shadow-[0_0_8px_#00f0ff] transition-all"
-            >
-              <FaGithub />
-            </a>
-            <a
-              href="https://linkedin.com/in/oza-tirth-28b031269"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg hover:text-cyber-cyan hover:drop-shadow-[0_0_8px_#00f0ff] transition-all"
-            >
-              <FaLinkedin />
-            </a>
-            <a
-              href="https://leetcode.com/u/OzaTirth_2004/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg hover:text-cyber-cyan hover:drop-shadow-[0_0_8px_#00f0ff] transition-all"
-            >
-              <FaCode />
-            </a>
-            <a
-              href="https://www.geeksforgeeks.org/user/ozatirth51/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg hover:text-cyber-cyan hover:drop-shadow-[0_0_8px_#00f0ff] transition-all"
-            >
-              <SiGeeksforgeeks />
-            </a>
-          </motion.div>
+            {/* Quick Profile Links */}
+            <div className="flex items-center gap-2.5 ml-2 text-theme-muted">
+              <a
+                href={personalInfo.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub Profile"
+                className="p-2 rounded-md border border-theme-border bg-theme-surface hover:text-theme-accent hover:border-theme-accent transition-colors"
+              >
+                <FaGithub className="text-sm" />
+              </a>
+              <a
+                href={personalInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn Profile"
+                className="p-2 rounded-md border border-theme-border bg-theme-surface hover:text-theme-accent hover:border-theme-accent transition-colors"
+              >
+                <FaLinkedin className="text-sm" />
+              </a>
+              <a
+                href="https://leetcode.com/u/OzaTirth_2004/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LeetCode Profile"
+                className="p-2 rounded-md border border-theme-border bg-theme-surface hover:text-theme-accent hover:border-theme-accent transition-colors"
+              >
+                <SiLeetcode className="text-sm" />
+              </a>
+              <a
+                href="https://www.geeksforgeeks.org/user/ozatirth51/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GeeksforGeeks Profile"
+                className="p-2 rounded-md border border-theme-border bg-theme-surface hover:text-theme-accent hover:border-theme-accent transition-colors"
+              >
+                <SiGeeksforgeeks className="text-sm" />
+              </a>
+            </div>
+          </div>
 
-          {/* Counters Row */}
-          <motion.div
-            variants={itemVariants}
-            className="grid grid-cols-3 gap-6 pt-6 border-t border-cyber-border/40 max-w-[500px]"
+          {/* Key Metric Highlights */}
+          <div
+            ref={statsRef}
+            className="grid grid-cols-3 gap-4 pt-6 border-t border-theme-border/70"
           >
             {personalInfo.stats.map((stat, idx) => (
               <div key={idx} className="flex flex-col">
-                <span className="font-orbitron font-black text-2xl md:text-3xl text-cyber-cyan drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">
-                  {stat.countUp ? <CountUp value={stat.value} /> : stat.value}
-                  {stat.countUp && "+"}
+                <span className="font-display font-bold text-2xl sm:text-3xl text-theme-text">
+                  {stat.value}
                 </span>
-                <span className="font-mono text-[9px] text-cyber-muted uppercase tracking-wider mt-1 leading-snug">
+                <span className="font-sans text-xs text-theme-muted mt-0.5">
                   {stat.label}
                 </span>
               </div>
             ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Hero Right Visual */}
-        <div className="hidden md:flex justify-center items-center relative h-[450px]">
-          {/* Animated Glowing Orbs */}
-          <div className="relative w-[580px] h-[780px]">
-            {/* Outer Spinning Ring */}
-            {/* <motion.div
-              className="absolute inset-[-20px] rounded-full border border-dashed border-cyber-cyan/35"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            /> */}
-            {/* Mid Spinning Ring */}
-            {/* <motion.div
-              className="absolute inset-[-10px] rounded-full border border-cyber-purple/20"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-            /> */}
-            
-            {/* Core Avatar Container (Static white shadow with transparent background) */}
-            <div className="absolute inset-[15%] overflow-hidden flex items-center justify-center bg-transparent">
-              <img
-                src="/img/Oza_Tirth.png"
-                alt="Tirth Oza"
-                className="w-full h-full object-cover opacity-100 select-none pointer-events-none"
-              />
-            </div>
-
-            {/* Orbiting Tech Tags
-            {floatingTags.map((tag, idx) => (
-              <motion.div
-                key={idx}
-                className="absolute font-mono text-[9px] font-semibold text-cyber-cyan bg-cyber-surface/90 border border-cyber-cyan/30 px-2.5 py-1 rounded-sm shadow-[0_0_10px_rgba(0,240,255,0.15)] whitespace-nowrap select-none"
-                style={{
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                }}
-                animate={{
-                  x: [tag.x, `${parseInt(tag.x) + 10}px`, `${parseInt(tag.x) - 10}px`, tag.x],
-                  y: [tag.y, `${parseInt(tag.y) - 15}px`, `${parseInt(tag.y) + 10}px`, tag.y],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: tag.delay,
-                }}
-              >
-                {tag.name}
-              </motion.div>
-            ))} */}
           </div>
         </div>
 
+        {/* Right Visual Column (Agent Routing & Radar Graph) */}
+        <div ref={visualRef} className="lg:col-span-6 flex flex-col justify-center">
+          <AgentSignalGraph />
+        </div>
       </div>
     </section>
   );
 };
 
 export default Hero;
+

@@ -1,3 +1,4 @@
+import React from "react";
 import { useMagneticEffect } from "../hooks/useMagneticEffect";
 
 const AnimatedButton = ({
@@ -6,44 +7,46 @@ const AnimatedButton = ({
   href,
   target,
   download,
-  variant = "primary", // primary or ghost
+  variant = "primary", // primary, secondary, or ghost
   className = "",
   type = "button",
   disabled = false,
 }) => {
-  // Apply magnetic effect with a smooth pull factor of 0.25
-  const magneticRef = useMagneticEffect(0.25);
+  const magneticRef = useMagneticEffect(0.2);
 
   const baseStyles = `
-    relative font-orbitron text-xs font-bold tracking-[0.15em] uppercase
-    px-8 py-3.5 inline-block text-center transition-all duration-300
-    select-none active:scale-95
+    relative font-sans text-xs font-semibold tracking-wide
+    px-5 py-2.5 inline-flex items-center justify-center gap-2 rounded-md
+    transition-all duration-200 select-none active:scale-[0.98]
+    cursor-pointer
   `;
 
   const disabledStyles = disabled
-    ? "opacity-70 cursor-not-allowed pointer-events-none saturate-75"
+    ? "opacity-50 cursor-not-allowed pointer-events-none"
     : "";
 
-  const variantStyles =
-    variant === "primary"
-      ? `
-        bg-gradient-to-r from-cyber-cyan to-cyber-purple text-[#020408]
-        hover:brightness-110 hover:shadow-[0_0_25px_rgba(0,240,255,0.6)]
-      `
-      : `
-        bg-transparent text-cyber-cyan border border-cyber-cyan
-        hover:bg-cyber-cyan/10 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]
-      `;
-
-  const clipStyle = {
-    clipPath: "polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%)",
-  };
+  let variantStyles = "";
+  if (variant === "primary") {
+    variantStyles = `
+      bg-theme-accent text-white dark:text-[#12161C] font-bold
+      hover:bg-theme-accent-hover shadow-sm hover:shadow-md
+    `;
+  } else if (variant === "secondary") {
+    variantStyles = `
+      bg-theme-surface-alt text-theme-text border border-theme-border
+      hover:border-theme-accent hover:text-theme-accent shadow-sm
+    `;
+  } else {
+    variantStyles = `
+      bg-transparent text-theme-text border border-theme-border
+      hover:border-theme-accent/60 hover:bg-theme-surface-alt/60
+    `;
+  }
 
   const buttonProps = {
     className: `${baseStyles} ${variantStyles} ${disabledStyles} ${className}`,
-    style: clipStyle,
     onClick,
-    ref: magneticRef, // Bind magnetic pull logic
+    ref: magneticRef,
   };
 
   if (href) {
@@ -61,10 +64,11 @@ const AnimatedButton = ({
   }
 
   return (
-    <button type={type} {...buttonProps}>
+    <button type={type} disabled={disabled} {...buttonProps}>
       {children}
     </button>
   );
 };
 
 export default AnimatedButton;
+

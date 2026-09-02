@@ -12,71 +12,60 @@ import GoogleArcade from "./sections/GoogleArcade";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 
-import ParticleBackground from "./components/ParticleBackground";
 import CyberGrid from "./components/CyberGrid";
 import { useTheme } from "./context/ThemeContext";
 
 function App() {
   const { theme } = useTheme();
   const { scrollYProgress } = useScroll();
-  
+
   // Spring smooth scroll progress bar
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 25,
-    restDelta: 0.001
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
   });
 
   return (
-    <div className={`relative min-h-screen transition-colors duration-500 overflow-x-hidden
-      ${theme === "dark" 
-        ? "bg-[#020408] text-[#e8f4f8]" 
-        : "bg-[#f4f7f6] text-[#0b132b]"
-      }
-    `}>
-      {/* Glow Scroll Progress Bar at the top */}
+    <div className="relative min-h-screen bg-theme-bg text-theme-text transition-colors duration-200 overflow-x-hidden">
+      {/* Top Scroll Progress Bar */}
       <motion.div
         style={{ scaleX }}
-        className="fixed top-0 left-0 right-0 h-[2.5px] z-[200] origin-left bg-gradient-to-r from-cyber-cyan via-cyber-purple to-cyber-pink shadow-[0_0_10px_rgba(0,240,255,0.8)]"
+        className="fixed top-0 left-0 right-0 h-[2.5px] z-[100] origin-left bg-theme-accent"
       />
 
-      {/* Cyber Noise texture and Scanline overlays (configured via tailwind/css) */}
-      <div className="cyber-overlay pointer-events-none fixed inset-0 z-40 opacity-[0.03] dark:opacity-[0.05]" />
-      <div className="scanlines-overlay pointer-events-none fixed inset-0 z-[41] opacity-[0.02] dark:opacity-[0.03]" />
-
-      {/* Interactive Background Systems */}
+      {/* Subtle Signal Grid & Ambient Background */}
       <CyberGrid />
-      <ParticleBackground />
 
       {/* Main UI Layout */}
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
-        
-        <main className="max-w-7xl mx-auto">
+
+        <main className="flex-1 max-w-7xl mx-auto w-full">
           <Hero />
-          
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-cyber-border/40 to-transparent" />
+
+          <div className="h-[1px] w-full max-w-6xl mx-auto bg-theme-border/60" />
           <About />
-          
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-cyber-border/40 to-transparent" />
-          <Skills />
-          
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-cyber-border/40 to-transparent" />
+
+          <div className="h-[1px] w-full max-w-6xl mx-auto bg-theme-border/60" />
           <Projects />
-          
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-cyber-border/40 to-transparent" />
+
+          <div className="h-[1px] w-full max-w-6xl mx-auto bg-theme-border/60" />
+          <Skills />
+
+          <div className="h-[1px] w-full max-w-6xl mx-auto bg-theme-border/60" />
           <Experience />
-          
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-cyber-border/40 to-transparent" />
+
+          <div className="h-[1px] w-full max-w-6xl mx-auto bg-theme-border/60" />
           <Certifications />
-          
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-cyber-border/40 to-transparent" />
+
+          <div className="h-[1px] w-full max-w-6xl mx-auto bg-theme-border/60" />
           <GoogleArcade />
-          
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-cyber-border/40 to-transparent" />
+
+          <div className="h-[1px] w-full max-w-6xl mx-auto bg-theme-border/60" />
           <CodingProfiles />
-          
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-cyber-border/40 to-transparent" />
+
+          <div className="h-[1px] w-full max-w-6xl mx-auto bg-theme-border/60" />
           <Contact />
         </main>
 
@@ -87,3 +76,4 @@ function App() {
 }
 
 export default App;
+

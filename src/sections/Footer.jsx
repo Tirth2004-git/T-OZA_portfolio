@@ -1,6 +1,6 @@
 import React from "react";
-import { FaGithub, FaLinkedin, FaCode, FaArrowUp } from "react-icons/fa";
-import { SiGeeksforgeeks } from "react-icons/si";
+import { FaGithub, FaLinkedin, FaArrowUp } from "react-icons/fa";
+import { SiLeetcode, SiGeeksforgeeks } from "react-icons/si";
 import { personalInfo } from "../data/portfolioData";
 
 const Footer = () => {
@@ -12,91 +12,84 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative border-t border-cyber-border/40 bg-cyber-bg/95 py-8 px-6 mt-16 z-10">
-      {/* Animated Top Line Glow */}
-      <div className="absolute top-[-1px] left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-cyber-cyan to-transparent shadow-[0_0_8px_#00f0ff] animate-pulse" />
-
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-        
-        {/* Logo and Copy */}
-        <div className="flex flex-col items-center md:items-start text-center md:text-left">
+    <footer className="relative border-t border-theme-border bg-theme-surface py-10 px-6 z-10">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6 text-center sm:text-left">
+        {/* Brand & Copyright */}
+        <div>
           <a
             href="#hero"
             onClick={(e) => {
               e.preventDefault();
               handleScrollTop();
             }}
-            className="flex items-center gap-2 mb-1.5"
+            className="flex items-center justify-center sm:justify-start gap-2 mb-1 cursor-pointer group"
           >
-            {personalInfo.logo.image ? (
-              <img
-                src={personalInfo.logo.image}
-                alt={personalInfo.logo.text}
-                className="h-6 w-auto object-contain select-none pointer-events-none filter drop-shadow-[0_0_6px_rgba(0,240,255,0.4)]"
-              />
-            ) : (
-              <span className="font-orbitron font-black text-base tracking-[0.15em] transition-all duration-300 hover:scale-105 select-none">
-                <span className="text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]">T</span>
-                <span className="text-cyber-pink drop-shadow-[0_0_8px_rgba(255,45,120,0.8)] animate-pulse">//</span>
-                <span className="bg-gradient-to-r from-cyber-cyan to-cyber-purple bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(0,240,255,0.5)]">OZA</span>
-              </span>
-            )}
+            <span className="w-2 h-2 rounded-full bg-theme-accent" />
+            <span className="font-display font-bold text-base text-theme-text group-hover:text-theme-accent transition-colors">
+              Tirth Oza
+            </span>
+            <span className="font-mono text-[10px] text-theme-muted bg-theme-surface-alt border border-theme-border px-1.5 py-0.5 rounded">
+              DEV
+            </span>
           </a>
-          <span className="font-mono text-[9px] text-cyber-muted uppercase tracking-widest">
-            © {new Date().getFullYear()} TIRTH OZA. ALL RIGHTS RESERVED.
-          </span>
+          <p className="font-sans text-xs text-theme-muted">
+            &copy; {new Date().getFullYear()} Tirth Oza. Built with LangGraph &amp; MERN principles.
+          </p>
         </div>
 
-        {/* Social Links */}
-        <div className="flex items-center gap-4 text-cyber-muted">
+        {/* Social Icons */}
+        <div className="flex items-center gap-3 text-theme-muted">
           <a
-            href="https://github.com/Tirth2004-git"
+            href={personalInfo.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm hover:text-cyber-cyan hover:drop-shadow-[0_0_6px_#00f0ff] transition-all"
+            aria-label="GitHub"
+            className="p-2 rounded-md border border-theme-border bg-theme-surface-alt hover:text-theme-accent hover:border-theme-accent transition-colors"
           >
-            <FaGithub />
+            <FaGithub className="text-sm" />
           </a>
           <a
-            href="https://linkedin.com/in/oza-tirth-28b031269"
+            href={personalInfo.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm hover:text-cyber-cyan hover:drop-shadow-[0_0_6px_#00f0ff] transition-all"
+            aria-label="LinkedIn"
+            className="p-2 rounded-md border border-theme-border bg-theme-surface-alt hover:text-theme-accent hover:border-theme-accent transition-colors"
           >
-            <FaLinkedin />
+            <FaLinkedin className="text-sm" />
           </a>
           <a
-            href="https://leetcode.com/u/ozatirth51/"
+            href="https://leetcode.com/u/OzaTirth_2004/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm hover:text-cyber-cyan hover:drop-shadow-[0_0_6px_#00f0ff] transition-all"
+            aria-label="LeetCode"
+            className="p-2 rounded-md border border-theme-border bg-theme-surface-alt hover:text-theme-accent hover:border-theme-accent transition-colors"
           >
-            <FaCode />
+            <SiLeetcode className="text-sm" />
           </a>
           <a
             href="https://www.geeksforgeeks.org/user/ozatirth51/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm hover:text-cyber-cyan hover:drop-shadow-[0_0_6px_#00f0ff] transition-all"
+            aria-label="GeeksforGeeks"
+            className="p-2 rounded-md border border-theme-border bg-theme-surface-alt hover:text-theme-accent hover:border-theme-accent transition-colors"
           >
-            <SiGeeksforgeeks />
+            <SiGeeksforgeeks className="text-sm" />
           </a>
-        </div>
 
-        {/* Back-To-Top Button */}
-        <div>
+          {/* Scroll to Top */}
           <button
             onClick={handleScrollTop}
-            className="flex items-center justify-center p-3 rounded-full border border-cyber-border bg-cyber-surface/60 text-cyber-cyan hover:border-cyber-cyan hover:shadow-[0_0_12px_rgba(0,240,255,0.4)] transition-all animate-bounce"
-            title="Return to Core"
+            aria-label="Scroll to top"
+            className="p-2 rounded-md border border-theme-border bg-theme-surface-alt text-theme-text hover:text-theme-accent hover:border-theme-accent transition-colors cursor-pointer ml-2"
+            title="Back to Top"
           >
             <FaArrowUp className="text-xs" />
           </button>
         </div>
-
       </div>
     </footer>
   );
 };
 
 export default Footer;
+

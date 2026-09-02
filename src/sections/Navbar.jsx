@@ -5,13 +5,13 @@ import { useTheme } from "../context/ThemeContext";
 import { personalInfo } from "../data/portfolioData";
 
 const navLinks = [
-  { name: "ABOUT", href: "#about" },
-  { name: "SKILLS", href: "#skills" },
-  { name: "PROJECTS", href: "#projects" },
-  { name: "EXP", href: "#experience" },
-  { name: "CREDENTIALS", href: "#certifications" },
-  { name: "PROFILES", href: "#profiles" },
-  { name: "CONTACT", href: "#contact" },
+  { name: "About", href: "#about" },
+  { name: "Projects", href: "#projects" },
+  { name: "Skills", href: "#skills" },
+  { name: "Experience", href: "#experience" },
+  { name: "Credentials", href: "#certifications" },
+  { name: "Profiles", href: "#profiles" },
+  { name: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
@@ -20,50 +20,37 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("hero");
   const [scrolled, setScrolled] = useState(false);
 
-  // Handle scroll detection for background glass effect
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 30);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Intersection Observer for scroll spy
   useEffect(() => {
-    const sections = ["hero", "about", "skills", "projects", "experience", "certifications", "profiles", "contact"];
-    
-    const observerOptions = {
-      root: null,
-      rootMargin: "-40% 0px -40% 0px", // Trigger when section occupies the center
-      threshold: 0,
-    };
-
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const sections = ["hero", "about", "projects", "skills", "experience", "certifications", "profiles", "contact"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-30% 0px -60% 0px" }
+    );
 
     sections.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
     });
 
     return () => observer.disconnect();
   }, []);
 
-  // Disable body scroll when mobile menu is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -75,10 +62,9 @@ const Navbar = () => {
     const targetId = href.replace("#", "");
     const element = document.getElementById(targetId);
     if (element) {
-      const offset = 80; // height of sticky navbar
+      const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
-
       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth",
@@ -87,96 +73,89 @@ const Navbar = () => {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 border-b
-        ${scrolled 
-          ? "bg-cyber-bg/85 border-cyber-border/80 shadow-[0_4px_30px_rgba(0,0,0,0.4)] backdrop-blur-md" 
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 px-6 py-3.5 border-b
+        ${scrolled
+          ? "bg-theme-bg/85 border-theme-border backdrop-blur-md shadow-sm"
           : "bg-transparent border-transparent"
         }
-        light:scrolled:bg-cyber-bgLight/85 light:scrolled:border-cyber-borderLight
       `}
     >
-      <div className="flex items-center justify-between w-full">
-      {/* Logo */}
-      <a
-        href="#hero"
-        onClick={(e) => handleLinkClick(e, "#hero")}
-        className="flex items-center gap-2"
-      >
-        {personalInfo.logo.image ? (
-          <img
-            src={personalInfo.logo.image}
-            alt={personalInfo.logo.text}
-            className="h-8 w-auto object-contain select-none pointer-events-none filter drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]"
-          />
-        ) : (
-          <span className="font-orbitron font-black text-xl tracking-[0.15em] transition-all duration-300 hover:scale-105 select-none">
-            <span className="text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">T</span>
-            <span className="text-cyber-pink drop-shadow-[0_0_10px_rgba(255,45,120,0.8)] animate-pulse">//</span>
-            <span className="bg-gradient-to-r from-cyber-cyan to-cyber-purple bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]">OZA</span>
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Brand */}
+        <a
+          href="#hero"
+          onClick={(e) => handleLinkClick(e, "#hero")}
+          className="flex items-center gap-2.5 group cursor-pointer"
+        >
+          <span className="w-2.5 h-2.5 rounded-full bg-theme-accent animate-signal-pulse" />
+          <span className="font-display font-bold text-lg tracking-tight text-theme-text group-hover:text-theme-accent transition-colors">
+            Tirth Oza
           </span>
-        )}
-      </a>
+          <span className="hidden sm:inline font-mono text-[10px] text-theme-muted bg-theme-surface-alt border border-theme-border px-2 py-0.5 rounded">
+            AI / MERN
+          </span>
+        </a>
 
-      {/* Desktop Links */}
-      <ul className="hidden md:flex items-center gap-8">
-        {navLinks.map((link) => {
-          const isActive = activeSection === link.href.replace("#", "");
-          return (
-            <li key={link.name}>
+        {/* Desktop Links */}
+        <nav className="hidden md:flex items-center gap-1">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.replace("#", "");
+            return (
               <a
+                key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className={`relative font-mono text-[10px] tracking-[0.15em] transition-all duration-300 py-1.5
-                  ${isActive 
-                    ? "text-cyber-cyan font-bold drop-shadow-[0_0_8px_rgba(0,240,255,0.5)]" 
-                    : "text-cyber-muted hover:text-cyber-cyan"
+                className={`font-sans text-xs font-medium px-3.5 py-1.5 rounded-md transition-colors
+                  ${isActive
+                    ? "text-theme-accent bg-theme-surface-alt font-semibold"
+                    : "text-theme-muted hover:text-theme-text hover:bg-theme-surface-alt/50"
                   }
                 `}
               >
                 {link.name}
-                <span
-                  className={`absolute bottom-0 left-0 h-[1.5px] bg-cyber-cyan shadow-[0_0_8px_rgba(0,240,255,0.8)] transition-all duration-300
-                    ${isActive ? "w-full" : "w-0 hover:w-full"}
-                  `}
-                />
               </a>
-            </li>
-          );
-        })}
-      </ul>
+            );
+          })}
+        </nav>
 
-      {/* Action Controls (Theme + Hamburger) */}
-      <div className="flex items-center gap-4">
-        {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="p-2 rounded-xs border border-cyber-border/50 hover:border-cyber-cyan/80 bg-cyber-surface/60 text-cyber-cyan hover:shadow-[0_0_12px_rgba(0,240,255,0.3)] transition-all duration-300"
-          title="Toggle Cyber Palette"
-        >
-          {theme === "dark" ? <FaSun className="text-sm" /> : <FaMoon className="text-sm" />}
-        </button>
+        {/* Right Actions: Status + Theme Switcher + Mobile Button */}
+        <div className="flex items-center gap-3">
+          {/* Status Indicator */}
+          <div className="hidden lg:flex items-center gap-2 font-mono text-[11px] text-theme-muted bg-theme-surface border border-theme-border px-3 py-1 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-theme-teal" />
+            <span>Open for roles</span>
+          </div>
 
-        {/* Mobile Hamburger */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 rounded-xs border border-cyber-border/50 bg-cyber-surface/60 text-cyber-cyan"
-        >
-          {isOpen ? <HiX className="text-lg" /> : <HiMenuAlt3 className="text-lg" />}
-        </button>
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="p-2 rounded-md border border-theme-border bg-theme-surface text-theme-text hover:border-theme-accent hover:text-theme-accent transition-colors cursor-pointer"
+            title={`Switch to ${theme === "dark" ? "Light" : "Dark"} Mode`}
+          >
+            {theme === "dark" ? (
+              <FaSun className="text-sm text-theme-accent" />
+            ) : (
+              <FaMoon className="text-sm text-theme-muted" />
+            )}
+          </button>
+
+          {/* Mobile Hamburger */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+            className="md:hidden p-2 rounded-md border border-theme-border bg-theme-surface text-theme-text"
+          >
+            {isOpen ? <HiX className="text-lg" /> : <HiMenuAlt3 className="text-lg" />}
+          </button>
+        </div>
       </div>
-    </div>
 
-      {/* Mobile Drawer Overlay */}
+      {/* Mobile Menu Drawer */}
       {isOpen && (
-        <div className={`fixed inset-x-0 bottom-0 top-[68px] z-40 flex flex-col items-center justify-start overflow-y-auto pt-10 pb-16 border-t
-          ${theme === "dark"
-            ? "bg-[#020408] border-cyber-border/30"
-            : "bg-[#f4f7f6] border-cyber-borderLight"
-          }
-          md:hidden animate-fade-in
-        `}>
-          <ul className="flex flex-col items-center gap-6">
+        <div className="fixed inset-x-0 bottom-0 top-[61px] z-40 bg-theme-bg/95 backdrop-blur-lg border-t border-theme-border md:hidden animate-fade-in p-6 flex flex-col justify-between overflow-y-auto">
+          <ul className="flex flex-col gap-2">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.replace("#", "");
               return (
@@ -184,8 +163,11 @@ const Navbar = () => {
                   <a
                     href={link.href}
                     onClick={(e) => handleLinkClick(e, link.href)}
-                    className={`font-orbitron text-lg tracking-[0.2em] transition-colors duration-300
-                      ${isActive ? "text-cyber-cyan font-extrabold" : "text-cyber-muted"}
+                    className={`block py-3 px-4 rounded-lg font-display text-lg font-semibold transition-colors
+                      ${isActive
+                        ? "text-theme-accent bg-theme-surface-alt"
+                        : "text-theme-muted hover:text-theme-text hover:bg-theme-surface-alt/50"
+                      }
                     `}
                   >
                     {link.name}
@@ -194,10 +176,16 @@ const Navbar = () => {
               );
             })}
           </ul>
+
+          <div className="pt-6 border-t border-theme-border font-mono text-xs text-theme-muted flex items-center justify-between">
+            <span>ozatirth51@gmail.com</span>
+            <span className="text-theme-teal">STATUS: ACTIVE</span>
+          </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 };
 
 export default Navbar;
+

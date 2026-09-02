@@ -1,55 +1,62 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { FaBriefcase } from "react-icons/fa";
 import SectionTitle from "../components/SectionTitle";
 import GlowCard from "../components/GlowCard";
 import { experienceData } from "../data/portfolioData";
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-24 relative overflow-hidden">
+    <section id="experience" className="py-20 relative">
       <div className="container mx-auto px-6">
-        
-        {/* Section Header */}
         <SectionTitle
-          label="WORK HISTORY"
-          title="Experience &amp;"
+          label="Experience"
+          title="Professional &amp;"
           highlight="Internships"
+          description="Industry engineering experience contributing across the software development lifecycle on applied AI systems."
         />
 
-        {/* Timeline Path */}
-        <div className="relative pl-8 md:pl-12 border-l border-gradient-to-b from-cyber-cyan via-cyber-purple to-transparent z-10 max-w-[800px] mx-auto">
+        <div className="max-w-3xl mx-auto">
           {experienceData.map((exp, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative mb-12"
+              transition={{ duration: 0.5 }}
+              className="relative"
             >
-              {/* Timeline Bullet Node */}
-              <span className="absolute left-[-37px] md:left-[-53px] top-6 w-4 h-4 rounded-full bg-cyber-cyan border-4 border-cyber-bg shadow-[0_0_12px_#00f0ff]" />
-
-              <GlowCard borderGlow="cyan" className="p-8">
-                {/* Period */}
-                <div className="font-mono text-xs text-cyber-cyan tracking-wider mb-2 font-bold">
-                  {exp.period}
+              <GlowCard className="p-6 sm:p-8" accent="default">
+                {/* Header info */}
+                <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+                  <div>
+                    <span className="font-mono text-[10px] text-theme-accent font-semibold block mb-1">
+                      {exp.period} &middot; {exp.type}
+                    </span>
+                    <h3 className="font-display font-bold text-xl sm:text-2xl text-theme-text">
+                      {exp.role}
+                    </h3>
+                    <h4 className="font-display font-medium text-sm text-theme-teal mt-0.5">
+                      {exp.company} &middot; <span className="text-theme-muted font-sans font-normal">{exp.location}</span>
+                    </h4>
+                  </div>
+                  <div className="p-2.5 rounded-md bg-theme-surface-alt border border-theme-border text-theme-accent">
+                    <FaBriefcase className="text-base" />
+                  </div>
                 </div>
 
-                {/* Role & Company */}
-                <h3 className="font-orbitron font-extrabold text-xl text-cyber-text tracking-wide mb-1 leading-snug">
-                  {exp.role}
-                </h3>
-                <h4 className="font-syne font-semibold text-sm text-cyber-purple mb-6 uppercase tracking-widest">
-                  {exp.company}
-                </h4>
+                {exp.summary && (
+                  <p className="font-sans text-xs sm:text-sm text-theme-muted mb-4 leading-relaxed font-medium">
+                    {exp.summary}
+                  </p>
+                )}
 
-                {/* Description Bullets */}
-                <ul className="space-y-3.5 text-cyber-muted text-xs md:text-sm leading-relaxed">
+                {/* Bullets */}
+                <ul className="space-y-2.5 pt-4 border-t border-theme-border/60 font-sans text-xs sm:text-sm text-theme-muted">
                   {exp.bullets.map((bullet, bIdx) => (
-                    <li key={bIdx} className="flex items-start gap-3">
-                      <span className="text-cyber-cyan mt-1 select-none font-bold">▸</span>
-                      <span>{bullet}</span>
+                    <li key={bIdx} className="flex items-start gap-2.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-theme-accent mt-2 shrink-0" />
+                      <span className="leading-relaxed">{bullet}</span>
                     </li>
                   ))}
                 </ul>
@@ -57,10 +64,10 @@ const Experience = () => {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );
 };
 
 export default Experience;
+

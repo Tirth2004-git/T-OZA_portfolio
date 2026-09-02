@@ -7,92 +7,39 @@ const CyberGrid = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Dynamic Grid Background */}
-      <div 
-        className="absolute inset-0 transition-all duration-700 opacity-60 dark:opacity-40"
-        style={{
-          backgroundImage: theme === "dark"
-            ? `linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-               linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px)`
-            : `linear-gradient(rgba(123, 47, 255, 0.03) 1px, transparent 1px),
-               linear-gradient(90deg, rgba(123, 47, 255, 0.03) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-        }}
-      />
+      {/* Subtle Radar & Signal Matrix Grid */}
+      <div className="absolute inset-0 signal-grid" />
 
-      {/* Futuristic Scanlines / Radial Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(2,4,8,0.4)_100%)] dark:bg-[radial-gradient(circle_at_center,transparent_30%,#020408_95%)]" />
-
-      {/* Floating Neon Orbs (Dark Mode: Cyan, Purple, Pink, Green. Light Mode: Soft sky, lavender, teal) */}
+      {/* Restrained Ambient Gradient Glows (Copper & Teal) */}
       {theme === "dark" ? (
         <>
-          {/* Orb 1: Cyan */}
+          {/* Top-Right Faint Copper Accent */}
           <motion.div
-            className="absolute w-[400px] h-[400px] rounded-full bg-cyber-cyan/10 blur-[120px] top-[-100px] left-[-100px]"
-            animate={{
-              x: [0, 50, -30, 0],
-              y: [0, -50, 40, 0],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            className="absolute w-[500px] h-[500px] rounded-full blur-[140px] top-[-150px] right-[-100px] pointer-events-none opacity-20"
+            style={{ backgroundColor: "var(--accent-primary)" }}
+            animate={{ opacity: [0.15, 0.25, 0.15] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           />
-          {/* Orb 2: Purple */}
+
+          {/* Bottom-Left Faint Teal Node Accent */}
           <motion.div
-            className="absolute w-[500px] h-[500px] rounded-full bg-cyber-purple/10 blur-[130px] bottom-[-200px] right-[-100px]"
-            animate={{
-              x: [0, -60, 40, 0],
-              y: [0, 50, -40, 0],
-            }}
-            transition={{
-              duration: 30,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          {/* Orb 3: Pink */}
-          <motion.div
-            className="absolute w-[350px] h-[350px] rounded-full bg-cyber-pink/5 blur-[100px] top-[40%] right-[10%]"
-            animate={{
-              x: [0, 40, -40, 0],
-              y: [0, -60, 60, 0],
-            }}
-            transition={{
-              duration: 22,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            className="absolute w-[450px] h-[450px] rounded-full blur-[140px] bottom-[10%] left-[-150px] pointer-events-none opacity-15"
+            style={{ backgroundColor: "var(--accent-secondary)" }}
+            animate={{ opacity: [0.1, 0.2, 0.1] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
         </>
       ) : (
         <>
-          {/* Light Orb 1: Soft Cyan/Blue */}
-          <motion.div
-            className="absolute w-[400px] h-[400px] rounded-full bg-blue-300/15 blur-[100px] top-[-50px] left-[10%]"
-            animate={{
-              x: [0, 30, -20, 0],
-              y: [0, 40, -30, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+          {/* Light Mode Faint Warm Accent */}
+          <div
+            className="absolute w-[500px] h-[500px] rounded-full blur-[130px] top-[-100px] right-[-100px] pointer-events-none opacity-[0.06]"
+            style={{ backgroundColor: "var(--accent-primary)" }}
           />
-          {/* Light Orb 2: Soft Violet */}
-          <motion.div
-            className="absolute w-[450px] h-[450px] rounded-full bg-purple-200/15 blur-[110px] bottom-[-100px] right-[15%]"
-            animate={{
-              x: [0, -40, 30, 0],
-              y: [0, -30, 40, 0],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+          {/* Light Mode Faint Teal Accent */}
+          <div
+            className="absolute w-[400px] h-[400px] rounded-full blur-[120px] bottom-[20%] left-[-100px] pointer-events-none opacity-[0.05]"
+            style={{ backgroundColor: "var(--accent-secondary)" }}
           />
         </>
       )}
@@ -101,3 +48,4 @@ const CyberGrid = () => {
 };
 
 export default CyberGrid;
+

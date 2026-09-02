@@ -1,71 +1,75 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import SectionTitle from "../components/SectionTitle";
-import SkillCard from "../components/SkillCard";
-import { filterButtons, getSkillsByCategory } from "../data/skillsData";
+import GlowCard from "../components/GlowCard";
+import { skillGroups } from "../data/skillsData";
 
 const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState("ALL");
-
-  const filteredSkills = getSkillsByCategory(activeCategory);
-
   return (
-    <section id="skills" className="py-24 relative overflow-hidden">
+    <section id="skills" className="py-20 relative">
       <div className="container mx-auto px-6">
-        
-        {/* Section Header */}
         <SectionTitle
-          label="TECH STACK"
+          label="Technical Stack"
           title="Skills &amp;"
-          highlight="Technologies"
+          highlight="Domains"
+          description="Grouped by domain expertise across autonomous agent orchestration, backend architecture, and core computer science foundations."
         />
 
-        {/* Dynamic Filter Buttons Bar */}
-        <div className="flex flex-wrap gap-3 mb-10 relative z-10">
-          {filterButtons.map((btn) => {
-            const isSelected = activeCategory === btn.category;
-            return (
-              <button
-                key={btn.category}
-                onClick={() => setActiveCategory(btn.category)}
-                className={`px-4 py-2 text-[10px] font-orbitron font-bold tracking-[0.15em] uppercase border transition-all duration-300 rounded-sm
-                  ${isSelected
-                    ? "bg-gradient-to-r from-cyber-cyan to-cyber-purple text-[#020408] border-transparent shadow-[0_0_15px_rgba(0,240,255,0.4)]"
-                    : "bg-cyber-surface/60 border-cyber-border/40 text-cyber-muted hover:border-cyber-cyan/50 hover:text-cyber-cyan"
-                  }
-                `}
-              >
-                {btn.label}
-              </button>
-            );
-          })}
+        {/* Grouped Domain Matrix */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {skillGroups.map((group, idx) => (
+            <motion.div
+              key={group.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
+              className="h-full"
+            >
+              <GlowCard className="p-6 h-full flex flex-col justify-between" accent="teal">
+                <div>
+                  {/* Domain Header */}
+                  <div className="mb-4">
+                    <span className="font-mono text-[10px] text-theme-teal font-semibold block mb-1">
+                      DOMAIN 0{idx + 1}
+                    </span>
+                    <h3 className="font-display font-bold text-lg text-theme-text leading-snug">
+                      {group.name}
+                    </h3>
+                    <p className="font-sans text-xs text-theme-muted mt-1 leading-relaxed">
+                      {group.description}
+                    </p>
+                  </div>
+
+                  {/* Skills List in Domain */}
+                  <div className="space-y-3 pt-3 border-t border-theme-border/60">
+                    {group.skills.map((skill, sIdx) => (
+                      <div key={sIdx} className="flex flex-col">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="font-display font-semibold text-theme-text">
+                            {skill.name}
+                          </span>
+                          <span className="font-mono text-[10px] text-theme-accent font-medium">
+                            {skill.level}
+                          </span>
+                        </div>
+                        {skill.desc && (
+                          <span className="font-sans text-[11px] text-theme-muted mt-0.5 leading-normal">
+                            {skill.desc}
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </GlowCard>
+            </motion.div>
+          ))}
         </div>
-
-        {/* Skills Grid */}
-        <motion.div 
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredSkills.map((skill) => (
-              <motion.div
-                key={skill.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                className="h-full"
-              >
-                <SkillCard skill={skill} />
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-
       </div>
     </section>
   );
 };
 
 export default Skills;
+

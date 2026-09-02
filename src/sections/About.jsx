@@ -1,87 +1,117 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { FaGraduationCap, FaCode, FaMicrochip, FaSatellite } from "react-icons/fa";
 import SectionTitle from "../components/SectionTitle";
 import GlowCard from "../components/GlowCard";
 import { personalInfo } from "../data/portfolioData";
+import { coreCompetencies } from "../data/skillsData";
 
 const About = () => {
   return (
-    <section id="about" className="py-24 relative overflow-hidden">
+    <section id="about" className="py-20 relative">
       <div className="container mx-auto px-6">
-        
-        {/* Section Header */}
         <SectionTitle
-          label="ABOUT ME"
-          title="Motivated by"
-          highlight="Innovation"
+          label="Background"
+          title="Engineering Mindset &amp;"
+          highlight="Foundations"
+          description="A blend of deep algorithmic problem solving, modern full-stack web architectures, and stateful multi-agent AI systems."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
-          {/* Biography Text */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Biography Text Column */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="md:col-span-7 space-y-6"
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-7 space-y-4 font-sans text-sm sm:text-base text-theme-muted leading-relaxed"
           >
             {personalInfo.bio.map((para, idx) => (
-              <p
-                key={idx}
-                className="text-cyber-muted text-sm md:text-base leading-relaxed font-medium"
-                dangerouslySetInnerHTML={{
-                  __html: para
-                    .replace("B.Tech Information Technology", "<strong>B.Tech Information Technology</strong>")
-                    .replace("MERN stack", "<strong>MERN stack</strong>")
-                    .replace("conflict-free scheduling algorithms", "<strong>conflict-free scheduling algorithms</strong>")
-                    .replace("AI internship", "<strong>AI internship</strong>")
-                    .replace("219+ problems on LeetCode", "<strong>219+ problems on LeetCode</strong>")
-                    .replace("Elite + Top 5%", "<strong>Elite + Top 5%</strong>")
-                }}
-              />
+              <p key={idx} className="leading-relaxed">
+                {para}
+              </p>
             ))}
+
+            {/* Core Competencies Matrix */}
+            <div className="pt-4">
+              <h4 className="font-display font-semibold text-sm text-theme-text mb-3">
+                Core Competencies &amp; Research Focus:
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {coreCompetencies.map((comp, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-2 p-2.5 rounded-md bg-theme-surface border border-theme-border text-xs text-theme-text font-sans font-medium"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-theme-teal shrink-0" />
+                    <span>{comp}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </motion.div>
 
-          {/* Education timeline cards */}
+          {/* Education & Academic Card */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="md:col-span-5"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-5 space-y-4"
           >
-            <GlowCard borderGlow="cyan" className="p-8">
-              <h3 className="font-orbitron font-extrabold text-[10px] tracking-[0.2em] text-cyber-cyan uppercase mb-6">
-                // EDUCATION PATH
-              </h3>
-              
-              <div className="relative pl-6 border-l border-cyber-border/40">
-                {/* Node marker */}
-                <span className="absolute left-[-5.5px] top-1.5 w-2.5 h-2.5 rounded-full bg-cyber-cyan shadow-[0_0_8px_#00f0ff] border border-cyber-bg" />
-                
-                <h4 className="font-orbitron font-extrabold text-base text-cyber-text tracking-wide mb-1 leading-snug">
-                  {personalInfo.education.institution}
-                </h4>
-                <p className="text-xs text-cyber-muted mb-4 font-semibold uppercase tracking-wider">
-                  {personalInfo.education.degree}
-                </p>
+            <GlowCard className="p-6 sm:p-7" accent="teal">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="p-2.5 rounded-md bg-theme-surface-alt border border-theme-border text-theme-teal">
+                  <FaGraduationCap className="text-xl" />
+                </div>
+                <div>
+                  <span className="font-mono text-[10px] text-theme-teal uppercase tracking-wider block font-semibold">
+                    Academic Background
+                  </span>
+                  <h3 className="font-display font-bold text-lg text-theme-text">
+                    {personalInfo.education.institution}
+                  </h3>
+                </div>
+              </div>
 
-                <div className="flex justify-between items-center text-xs font-mono">
-                  <span className="text-cyber-gold font-bold drop-shadow-[0_0_6px_rgba(255,215,0,0.3)]">
+              <div className="space-y-3 font-sans text-xs text-theme-muted border-t border-theme-border/60 pt-4">
+                <div className="flex justify-between items-center">
+                  <span className="font-medium text-theme-text">Degree:</span>
+                  <span>{personalInfo.education.degree}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="font-medium text-theme-text">Timeline:</span>
+                  <span>{personalInfo.education.period}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="font-medium text-theme-text">Academic Merit:</span>
+                  <span className="font-mono font-bold text-theme-accent bg-theme-surface-alt border border-theme-border px-2 py-0.5 rounded">
                     {personalInfo.education.gpa}
                   </span>
-                  <span className="text-cyber-muted font-medium">
-                    {personalInfo.education.period}
-                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="font-medium text-theme-text">Location:</span>
+                  <span>{personalInfo.education.location}</span>
                 </div>
               </div>
             </GlowCard>
+
+            {/* Radar / ISRO Hackathon Highlight Banner */}
+            <div className="p-5 rounded-lg border border-theme-border bg-theme-surface-alt/60 text-xs text-theme-muted font-sans flex items-start gap-3">
+              <FaSatellite className="text-theme-accent text-lg shrink-0 mt-0.5" />
+              <div>
+                <span className="font-semibold text-theme-text block font-display mb-1">
+                  ISRO Bharatiya Antariksh Hackathon 2026
+                </span>
+                Analyzed Chandrayaan-2 DFSAR polar radar &amp; OHRC optical sensor data for lunar subsurface ice detection.
+              </div>
+            </div>
           </motion.div>
         </div>
-
       </div>
     </section>
   );
 };
 
 export default About;
+

@@ -1,138 +1,145 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { SiLeetcode, SiGeeksforgeeks, SiGithub } from "react-icons/si";
-import { FaCode } from "react-icons/fa";
+import { FaSatellite, FaExternalLinkAlt, FaAward } from "react-icons/fa";
 import SectionTitle from "../components/SectionTitle";
 import GlowCard from "../components/GlowCard";
 import AnimatedButton from "../components/AnimatedButton";
-import { codingProfilesData } from "../data/portfolioData";
-
-// Local CountUp Component
-const ProfileCountUp = ({ value, duration = 1.8 }) => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    let start = 0;
-    const end = parseInt(value, 10);
-    if (isNaN(end)) return;
-    const totalMiliseconds = duration * 1000;
-    const incrementTime = Math.max(10, Math.floor(totalMiliseconds / end));
-
-    const timer = setInterval(() => {
-      start += 1;
-      setCount(start);
-      if (start >= end) {
-        clearInterval(timer);
-      }
-    }, incrementTime);
-
-    return () => clearInterval(timer);
-  }, [value, duration]);
-
-  return <span>{count}</span>;
-};
+import { codingProfilesData, hackathonsData } from "../data/portfolioData";
 
 const CodingProfiles = () => {
   const getIcon = (iconName) => {
     switch (iconName) {
-      case "code":
-        return <SiLeetcode className="text-3xl" />;
+      case "leetcode":
+        return <SiLeetcode className="text-2xl text-[#FFA116]" />;
       case "gfg":
-        return <SiGeeksforgeeks className="text-3xl" />;
+        return <SiGeeksforgeeks className="text-2xl text-[#2F8D46]" />;
       case "github":
-        return <SiGithub className="text-3xl" />;
+        return <SiGithub className="text-2xl text-theme-text" />;
       default:
-        return <FaCode className="text-3xl" />;
+        return <FaAward className="text-2xl text-theme-accent" />;
     }
   };
 
   return (
-    <section id="profiles" className="py-24 relative overflow-hidden">
+    <section id="profiles" className="py-20 relative">
       <div className="container mx-auto px-6">
-        
-        {/* Section Header */}
         <SectionTitle
-          label="CODING METRICS"
-          title="Competitive"
+          label="Research &amp; Metrics"
+          title="Achievements &amp;"
           highlight="Profiles"
+          description="National space hackathons, planetary radar data analytics, and continuous algorithmic problem solving."
         />
 
-        {/* Profiles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-          {codingProfilesData.map((profile, idx) => {
-            const hasNumber = /\d+/.test(profile.stats);
-            const numVal = hasNumber ? profile.stats.match(/\d+/)[0] : null;
-            const suffix = hasNumber ? profile.stats.replace(numVal, "") : profile.stats;
-
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="h-full"
-              >
-                <GlowCard
-                  borderGlow={profile.color}
-                  className="p-8 h-full flex flex-col justify-between"
-                >
+        {/* Featured ISRO Hackathon Card */}
+        {hackathonsData.map((hack, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-8"
+          >
+            <GlowCard className="p-6 sm:p-8" accent="default">
+              <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-3 rounded-lg bg-theme-surface-alt border border-theme-border text-theme-accent">
+                    <FaSatellite className="text-2xl" />
+                  </div>
                   <div>
-                    {/* Header */}
-                    <div className="flex justify-between items-center mb-6">
-                      <div
-                        className={`p-3 rounded-sm bg-cyber-surface border border-cyber-border/40
-                          ${profile.color === "gold" ? "text-cyber-gold border-cyber-gold/25" : ""}
-                          ${profile.color === "green" ? "text-cyber-green border-cyber-green/25" : ""}
-                          ${profile.color === "cyan" ? "text-cyber-cyan border-cyber-cyan/25" : ""}
-                        `}
-                      >
-                        {getIcon(profile.icon)}
-                      </div>
-                      <span className="font-mono text-[9px] text-cyber-muted tracking-wider uppercase bg-cyber-surface/50 border border-cyber-border/20 px-2.5 py-0.5">
-                        {profile.platform}
-                      </span>
-                    </div>
-
-                    {/* Stats Counter */}
-                    <h3 className="font-orbitron font-black text-2xl md:text-3xl mb-3 tracking-wide text-cyber-text">
-                      {numVal ? (
-                        <>
-                          <ProfileCountUp value={numVal} />
-                          {suffix}
-                        </>
-                      ) : (
-                        profile.stats
-                      )}
+                    <span className="font-mono text-[10px] text-theme-accent font-semibold block mb-0.5">
+                      {hack.badge} &middot; {hack.year}
+                    </span>
+                    <h3 className="font-display font-bold text-xl sm:text-2xl text-theme-text">
+                      {hack.title}
                     </h3>
-
-                    {/* Details */}
-                    <p className="text-xs text-cyber-purple font-mono uppercase tracking-wider mb-3 leading-snug">
-                      @{profile.username}
-                    </p>
-                    <p className="text-xs text-cyber-muted font-medium leading-relaxed mb-8">
-                      {profile.details}
+                    <p className="font-sans text-xs text-theme-teal mt-0.5 font-medium">
+                      {hack.issuer}
                     </p>
                   </div>
+                </div>
 
-                  {/* Profile Link Button */}
-                  <AnimatedButton
-                    variant="ghost"
-                    href={profile.url}
-                    target="_blank"
-                    className="w-full !px-4 !py-2.5 flex items-center justify-center gap-2 !text-[9px]"
+                <AnimatedButton
+                  variant="secondary"
+                  href={hack.verifyUrl}
+                  target="_blank"
+                  className="!px-3.5 !py-2 !text-xs"
+                >
+                  <FaExternalLinkAlt className="text-xs" /> View Project
+                </AnimatedButton>
+              </div>
+
+              <p className="font-sans text-xs sm:text-sm text-theme-muted leading-relaxed mb-4">
+                {hack.description}
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-4 border-t border-theme-border/60">
+                {hack.highlights.map((hl, hIdx) => (
+                  <div
+                    key={hIdx}
+                    className="p-3 rounded-md bg-theme-surface-alt/70 border border-theme-border text-xs text-theme-muted leading-relaxed font-sans"
                   >
-                    Launch Terminal //
-                  </AnimatedButton>
-                </GlowCard>
-              </motion.div>
-            );
-          })}
-        </div>
+                    <span className="font-mono text-[10px] text-theme-teal block mb-1 font-semibold">
+                      SIGNAL 0{hIdx + 1}
+                    </span>
+                    {hl}
+                  </div>
+                ))}
+              </div>
+            </GlowCard>
+          </motion.div>
+        ))}
 
+        {/* Coding Profiles Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {codingProfilesData.map((profile, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              className="h-full"
+            >
+              <GlowCard className="p-6 h-full flex flex-col justify-between" accent="teal">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="p-2.5 rounded-md bg-theme-surface-alt border border-theme-border">
+                      {getIcon(profile.icon)}
+                    </div>
+                    <span className="font-mono text-[10px] text-theme-muted bg-theme-surface-alt border border-theme-border px-2 py-0.5 rounded">
+                      {profile.platform}
+                    </span>
+                  </div>
+
+                  <h3 className="font-display font-bold text-xl text-theme-text mb-1">
+                    {profile.stats}
+                  </h3>
+                  <p className="font-mono text-xs text-theme-accent mb-3 font-medium">
+                    @{profile.username}
+                  </p>
+                  <p className="font-sans text-xs text-theme-muted leading-relaxed mb-6">
+                    {profile.details}
+                  </p>
+                </div>
+
+                <AnimatedButton
+                  variant="secondary"
+                  href={profile.url}
+                  target="_blank"
+                  className="w-full !py-2 !text-xs justify-center"
+                >
+                  <FaExternalLinkAlt className="text-xs" /> View Profile
+                </AnimatedButton>
+              </GlowCard>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
 };
 
 export default CodingProfiles;
+
