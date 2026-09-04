@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import Navbar from "./sections/Navbar";
 import Hero from "./sections/Hero";
@@ -19,12 +19,32 @@ function App() {
   const { theme } = useTheme();
   const { scrollYProgress } = useScroll();
 
+  // Silent fire-and-forget visitor notification ping on page load
+  useEffect(() => {
+    try {
+      fetch("/api/visitor-log", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          path: window.location.pathname || "/",
+          referrer: document.referrer || "Direct Visit",
+        }),
+        keepalive: true,
+      }).catch(() => {
+        // Fail completely silently for the visitor
+      });
+    } catch (e) {
+      // Fail silently
+    }
+  }, []);
+
   // Spring smooth scroll progress bar
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
   });
+
 
   return (
     <div className="relative min-h-screen bg-theme-bg text-theme-text transition-colors duration-200 overflow-x-hidden">

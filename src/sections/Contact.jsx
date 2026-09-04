@@ -7,9 +7,10 @@ import AnimatedButton from "../components/AnimatedButton";
 import { personalInfo } from "../data/portfolioData";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "", _hp: "" });
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState(null); // 'submitting', 'success', 'error'
+  const [status, setStatus] = useState(null); // 'submitting' | 'success' | 'error'
+  const [serverMessage, setServerMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,30 +22,52 @@ const Contact = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = "Please enter your name.";
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      newErrors.name = "Please enter your name (at least 2 characters).";
+    }
     if (!formData.email.trim()) {
       newErrors.email = "Please enter your email address.";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
       newErrors.email = "Please enter a valid email address.";
     }
-    if (!formData.message.trim()) newErrors.message = "Please enter your message.";
+    if (!formData.message.trim() || formData.message.trim().length < 5) {
+      newErrors.message = "Please enter your message (at least 5 characters).";
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
     setStatus("submitting");
+    setServerMessage("");
 
-    // Simulate reliable dispatch
-    setTimeout(() => {
-      setStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-      setTimeout(() => setStatus(null), 5000);
-    }, 1000);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setStatus("success");
+        setServerMessage(data.message || "Thank you! Your message was transmitted successfully.");
+        setFormData({ name: "", email: "", message: "", _hp: "" });
+        setTimeout(() => setStatus(null), 6000);
+      } else {
+        setStatus("error");
+        setServerMessage(data.error || "Failed to transmit message. Please try again.");
+      }
+    } catch (err) {
+      setStatus("error");
+      setServerMessage("Network error: Unable to reach the server. Please check your connection or contact directly via email.");
+    }
   };
+
 
   return (
     <section id="contact" className="py-20 relative">
@@ -208,6 +231,18 @@ const Contact = () => {
                   )}
                 </div>
 
+                {/* Invisible honeypot field for bot spam trap */}
+                <input
+                  type="text"
+                  name="_hp"
+                  value={formData._hp}
+                  onChange={handleChange}
+                  tabIndex="-1"
+                  autoComplete="off"
+                  style={{ display: "none", position: "absolute", left: "-9999px" }}
+                  aria-hidden="true"
+                />
+
                 {/* Submit button */}
                 <AnimatedButton
                   type="submit"
@@ -218,7 +253,7 @@ const Contact = () => {
                   {status === "submitting" ? "Transmitting Message..." : "Send Message"}
                 </AnimatedButton>
 
-                {/* Toast feedback */}
+                {/* Feedback banners */}
                 <AnimatePresence>
                   {status === "success" && (
                     <motion.div
@@ -228,7 +263,19 @@ const Contact = () => {
                       className="p-3.5 rounded-md bg-theme-surface-alt border border-theme-teal text-theme-teal flex items-center gap-2.5 text-xs font-sans font-medium"
                     >
                       <FaCheckCircle className="text-sm shrink-0" />
-                      <span>Thank you! Your message was transmitted successfully.</span>
+                      <span>{serverMessage}</span>
+                    </motion.div>
+                  )}
+
+                  {status === "error" && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="p-3.5 rounded-md bg-theme-surface-alt border border-red-500 text-red-500 flex items-center gap-2.5 text-xs font-sans font-medium"
+                    >
+                      <FaExclamationCircle className="text-sm shrink-0" />
+                      <span>{serverMessage}</span>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -242,4 +289,5 @@ const Contact = () => {
 };
 
 export default Contact;
+
 
