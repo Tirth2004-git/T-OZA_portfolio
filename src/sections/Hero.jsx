@@ -96,13 +96,23 @@ const Hero = () => {
       <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
         {/* Left Content Column */}
         <div className="lg:col-span-6 flex flex-col justify-center">
-          {/* Signal Status Badge */}
-          <div
-            ref={badgeRef}
-            className="inline-flex items-center gap-2 font-mono text-xs text-theme-accent bg-theme-surface border border-theme-border px-3 py-1 rounded-full w-fit mb-6 shadow-sm"
-          >
-            <span className="w-2 h-2 rounded-full bg-theme-accent animate-signal-pulse" />
-            <span>MERN &amp; Multi-Agent AI Developer</span>
+          {/* Signal Status Badge & Profile Avatar */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="relative">
+              <img
+                src={personalInfo.avatar || "/img/Oza_Tirth.png"}
+                alt={personalInfo.name}
+                className="w-11 h-11 rounded-full object-cover object-top border-2 border-theme-accent/60 shadow-md shadow-theme-accent/10"
+              />
+              <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-theme-surface rounded-full" />
+            </div>
+            <div
+              ref={badgeRef}
+              className="inline-flex items-center gap-2 font-mono text-xs text-theme-accent bg-theme-surface border border-theme-border px-3 py-1.5 rounded-full w-fit shadow-sm"
+            >
+              <span className="w-2 h-2 rounded-full bg-theme-accent animate-signal-pulse" />
+              <span>MERN &amp; Multi-Agent AI Developer</span>
+            </div>
           </div>
 
           {/* Heading */}
@@ -136,8 +146,10 @@ const Hero = () => {
             </AnimatedButton>
             <AnimatedButton
               variant="secondary"
-              href="/img/Tirth_resume.jpg"
-              download="Tirth_Oza_Resume.jpg"
+              href={personalInfo.resume || "/img/Tirth_Oza_Resume.pdf"}
+              download="Tirth_Oza_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Resume
             </AnimatedButton>

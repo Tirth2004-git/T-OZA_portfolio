@@ -88,7 +88,11 @@ const Navbar = () => {
           onClick={(e) => handleLinkClick(e, "#hero")}
           className="flex items-center gap-2.5 group cursor-pointer"
         >
-          <span className="w-2.5 h-2.5 rounded-full bg-theme-accent animate-signal-pulse" />
+          <img
+            src={personalInfo.avatar || "/img/Oza_Tirth.png"}
+            alt={personalInfo.name}
+            className="w-7 h-7 rounded-full object-cover object-top border border-theme-accent/50 shadow-sm"
+          />
           <span className="font-display font-bold text-lg tracking-tight text-theme-text group-hover:text-theme-accent transition-colors">
             Tirth Oza
           </span>

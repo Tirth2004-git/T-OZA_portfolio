@@ -26,6 +26,8 @@ export const personalInfo = {
   name: "Tirth Oza",
   title: "MERN & AI / LLM Developer",
   status: "Available for Roles & Research",
+  avatar: "/img/Oza_Tirth.png",
+  resume: "/img/Tirth_Oza_Resume.pdf",
   tagline: "Building multi-agent AI systems, full-stack platforms, and radar signal analytics.",
   email: "ozatirth51@gmail.com",
   phone: "+91 93*** *****",

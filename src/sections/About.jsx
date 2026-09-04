@@ -59,6 +59,43 @@ const About = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-5 space-y-4"
           >
+            {/* Profile Photo Card */}
+            <GlowCard className="p-5 sm:p-6" accent="accent">
+              <div className="flex items-center gap-4">
+                <div className="relative shrink-0">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-theme-accent/60 shadow-lg shadow-theme-accent/10 bg-theme-surface-alt">
+                    <img
+                      src={personalInfo.avatar || "/img/Oza_Tirth.png"}
+                      alt={personalInfo.name}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-theme-surface rounded-full animate-pulse" title="Available for roles" />
+                </div>
+                <div className="min-w-0">
+                  <span className="font-mono text-[10px] text-theme-accent uppercase tracking-wider block font-semibold">
+                    Developer Profile
+                  </span>
+                  <h3 className="font-display font-bold text-lg sm:text-xl text-theme-text truncate">
+                    {personalInfo.name}
+                  </h3>
+                  <p className="font-sans text-xs text-theme-muted mt-0.5">
+                    {personalInfo.title}
+                  </p>
+                  <div className="mt-3 flex items-center gap-2">
+                    <a
+                      href={personalInfo.resume || "/img/Tirth_Oza_Resume.pdf"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-mono text-xs text-theme-accent bg-theme-accent/10 hover:bg-theme-accent hover:text-theme-bg px-2.5 py-1 rounded transition-colors"
+                    >
+                      View Resume PDF &rarr;
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </GlowCard>
+
             <GlowCard className="p-6 sm:p-7" accent="teal">
               <div className="flex items-center gap-3 mb-5">
                 <div className="p-2.5 rounded-md bg-theme-surface-alt border border-theme-border text-theme-teal">
