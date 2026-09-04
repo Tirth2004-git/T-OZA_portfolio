@@ -51,67 +51,89 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Education & Academic Card */}
+          {/* Right Column: Unified Developer Profile & Academic Bento */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-5 space-y-4"
+            className="lg:col-span-5 flex flex-col gap-5"
           >
-            {/* Profile Photo Card */}
-            <GlowCard className="p-5 sm:p-6" accent="accent">
-              <div className="flex items-center gap-4">
-                <div className="relative shrink-0">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-theme-accent/60 shadow-lg shadow-theme-accent/10 bg-theme-surface-alt">
+            {/* Developer Identity Spotlight Card */}
+            <GlowCard className="p-6" accent="accent">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                {/* Profile Portrait */}
+                <div className="relative shrink-0 group">
+                  <div className="w-28 h-28 sm:w-28 sm:h-28 rounded-xl overflow-hidden border-2 border-theme-accent/50 shadow-md shadow-theme-accent/15 bg-theme-surface-alt">
                     <img
                       src={personalInfo.avatar || "/img/Oza_Tirth.png"}
                       alt={personalInfo.name}
-                      className="w-full h-full object-cover object-top"
+                      className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-theme-surface rounded-full animate-pulse" title="Available for roles" />
+                  <span
+                    className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-theme-surface rounded-full animate-pulse"
+                    title="Available for roles"
+                  />
                 </div>
-                <div className="min-w-0">
-                  <span className="font-mono text-[10px] text-theme-accent uppercase tracking-wider block font-semibold">
-                    Developer Profile
-                  </span>
-                  <h3 className="font-display font-bold text-lg sm:text-xl text-theme-text truncate">
+
+                {/* Identity Info */}
+                <div className="flex-1 text-center sm:text-left">
+                  <div className="inline-flex items-center gap-1.5 font-mono text-[10px] text-theme-accent bg-theme-accent/10 border border-theme-accent/20 px-2 py-0.5 rounded-full mb-1.5 font-semibold uppercase tracking-wider">
+                    <span className="w-1.5 h-1.5 rounded-full bg-theme-accent" />
+                    {personalInfo.status}
+                  </div>
+
+                  <h3 className="font-display font-bold text-xl text-theme-text">
                     {personalInfo.name}
                   </h3>
                   <p className="font-sans text-xs text-theme-muted mt-0.5">
                     {personalInfo.title}
                   </p>
-                  <div className="mt-3 flex items-center gap-2">
+                  <p className="font-mono text-[11px] text-theme-muted/80 mt-1">
+                    📍 {personalInfo.location}
+                  </p>
+
+                  <div className="mt-3.5 flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                    <a
+                      href={personalInfo.resume || "/img/Tirth_Oza_Resume.pdf"}
+                      download="Tirth_Oza_Resume.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-mono text-xs font-medium text-theme-bg bg-theme-accent hover:opacity-90 px-3 py-1.5 rounded-md transition-all shadow-sm"
+                    >
+                      <span>Download Resume</span>
+                    </a>
                     <a
                       href={personalInfo.resume || "/img/Tirth_Oza_Resume.pdf"}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 font-mono text-xs text-theme-accent bg-theme-accent/10 hover:bg-theme-accent hover:text-theme-bg px-2.5 py-1 rounded transition-colors"
+                      className="inline-flex items-center gap-1.5 font-mono text-xs text-theme-text bg-theme-surface-alt hover:bg-theme-border border border-theme-border px-3 py-1.5 rounded-md transition-colors"
                     >
-                      View Resume PDF &rarr;
+                      <span>Preview PDF</span>
                     </a>
                   </div>
                 </div>
               </div>
             </GlowCard>
 
-            <GlowCard className="p-6 sm:p-7" accent="teal">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="p-2.5 rounded-md bg-theme-surface-alt border border-theme-border text-theme-teal">
-                  <FaGraduationCap className="text-xl" />
+            {/* Academic & Research Card */}
+            <GlowCard className="p-6" accent="teal">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-md bg-theme-surface-alt border border-theme-border text-theme-teal">
+                  <FaGraduationCap className="text-lg" />
                 </div>
                 <div>
                   <span className="font-mono text-[10px] text-theme-teal uppercase tracking-wider block font-semibold">
                     Academic Background
                   </span>
-                  <h3 className="font-display font-bold text-lg text-theme-text">
+                  <h3 className="font-display font-bold text-base text-theme-text">
                     {personalInfo.education.institution}
                   </h3>
                 </div>
               </div>
 
-              <div className="space-y-3 font-sans text-xs text-theme-muted border-t border-theme-border/60 pt-4">
+              <div className="space-y-2.5 font-sans text-xs text-theme-muted border-t border-theme-border/60 pt-3 mb-4">
                 <div className="flex justify-between items-center">
                   <span className="font-medium text-theme-text">Degree:</span>
                   <span>{personalInfo.education.degree}</span>
@@ -126,23 +148,19 @@ const About = () => {
                     {personalInfo.education.gpa}
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="font-medium text-theme-text">Location:</span>
-                  <span>{personalInfo.education.location}</span>
+              </div>
+
+              {/* Radar / ISRO Hackathon Highlight Banner */}
+              <div className="p-3.5 rounded-md border border-theme-border bg-theme-surface-alt/70 text-xs text-theme-muted font-sans flex items-start gap-2.5">
+                <FaSatellite className="text-theme-accent text-base shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold text-theme-text block font-display text-[11px] mb-0.5">
+                    ISRO Bharatiya Antariksh Hackathon 2026
+                  </span>
+                  Chandrayaan-2 DFSAR radar &amp; optical data analysis for lunar subsurface ice detection.
                 </div>
               </div>
             </GlowCard>
-
-            {/* Radar / ISRO Hackathon Highlight Banner */}
-            <div className="p-5 rounded-lg border border-theme-border bg-theme-surface-alt/60 text-xs text-theme-muted font-sans flex items-start gap-3">
-              <FaSatellite className="text-theme-accent text-lg shrink-0 mt-0.5" />
-              <div>
-                <span className="font-semibold text-theme-text block font-display mb-1">
-                  ISRO Bharatiya Antariksh Hackathon 2026
-                </span>
-                Analyzed Chandrayaan-2 DFSAR polar radar &amp; OHRC optical sensor data for lunar subsurface ice detection.
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>
