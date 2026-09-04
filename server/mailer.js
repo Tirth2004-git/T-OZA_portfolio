@@ -8,7 +8,7 @@ export function getTransporter() {
   const pass = process.env.EMAIL_PASS;
 
   if (!user || !pass) {
-    console.warn("[Mailer] Warning: EMAIL_USER or EMAIL_PASS is not configured in environment variables.");
+    throw new Error("Email service is not configured: EMAIL_USER or EMAIL_PASS environment variable is missing.");
   }
 
   return nodemailer.createTransport({

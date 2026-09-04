@@ -45,7 +45,7 @@ export default async function handler(req, res) {
     console.error("[Contact Serverless Error]:", error?.message || error);
     return res.status(500).json({
       success: false,
-      error: "Failed to transmit message due to a server error. Please try again later.",
+      error: error?.message || "Failed to transmit message due to a server error. Please try again later.",
     });
   }
 }
